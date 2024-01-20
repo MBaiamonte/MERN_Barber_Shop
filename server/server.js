@@ -7,7 +7,6 @@ const port = process.env.PORT || 5000
 // const cookieParser = require('cookie-parser');
 const connectDB = require('./config/mongoose');
 
-
 //connect to Database 
 connectDB()
     .then(() => {
@@ -21,9 +20,6 @@ connectDB()
         process.exit(1); // Terminates the process if the database connection fails
     });
 
-
-
-
 app.use(
     cors({
         credentials: true,
@@ -36,5 +32,5 @@ app.use(
 connectDB();
 
 //import routes here
-
-// app.listen(port, ()=> console.log(`Servers up and running on ${port}` ));
+const userRoutes = require('./routes/userRoutes');
+app.use('/api', userRoutes);

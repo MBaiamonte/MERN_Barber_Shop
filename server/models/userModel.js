@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String,
         required: [true, "Please enter your email"], 
-        unique: true
+        unique: [true, "please enter a different email"]
     },
     phoneNumber:{
         type:Number,
