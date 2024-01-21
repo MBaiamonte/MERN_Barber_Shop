@@ -34,6 +34,8 @@ connectDB();
 //Import Routes
 const userRoutes = require('./routes/userRoutes');
 const serviceRoutes = require('./routes/serviceRoutes')
+const appointmentRoutes = require('./routes/appointmentRoutes')
 app.use('/api', userRoutes);
 app.use('/api', serviceRoutes);
+app.use('/api', appointmentRoutes)
 
