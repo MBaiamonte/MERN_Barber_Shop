@@ -15,10 +15,18 @@ const serviceSchema = new mongoose.Schema({
         required: true,
         default: 10,
     },
-    price:{
-        type:Number, 
+    price: {
+        type: Number,
         required: true,
-        default: 0.00,
+        validate: {
+            validator: function (value) {
+                // Custom validator function to check if the price has exactly two decimal places
+                const regex = /^\d+(\.\d{1,2})?$/;
+                return regex.test(value.toString());
+            },
+            message: 'Price must have exactly two decimal places'
+        },
+        default:0.00
     }
 },{
     timestamps:true

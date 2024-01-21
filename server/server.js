@@ -10,7 +10,7 @@ const connectDB = require('./config/mongoose');
 //connect to Database 
 connectDB()
     .then(() => {
-    // Start your server after successfully connecting to the database
+    // Start server after successfully connecting to the database
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`);
         });
@@ -31,6 +31,9 @@ app.use(
     )
 connectDB();
 
-//import routes here
+//Import Routes
 const userRoutes = require('./routes/userRoutes');
+const serviceRoutes = require('./routes/serviceRoutes')
 app.use('/api', userRoutes);
+app.use('/api', serviceRoutes);
+
