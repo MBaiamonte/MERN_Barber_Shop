@@ -1,19 +1,21 @@
 const User = require('../models/userModel');
+const jwt = require('jsonwebtoken')
 
-//Description:  Create New
+//Description:  Create New User
 //Route:        POST - api/users/create
 //Access:       Public
-const createUser = async(req,res) => {
+const createUser = async (req, res) => {
     try {
         const newUser = new User(req.body);
         await newUser.save();
-        res.status(201).json(newUser)
+        res.status(201).json(newUser);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        console.error('Error creating user:', error);
+        res.status(400).json({ error: 'Unable to create user' });
     }
 };
 
-//Description:  Get All Services
+//Description:  Get All Users
 //Route:        GET - api/users/all
 //Access:       Public
 const getAllUsers = async (req, res) => {
@@ -21,7 +23,8 @@ const getAllUsers = async (req, res) => {
         const users = await User.find();
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Error getting users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
@@ -73,10 +76,45 @@ const deleteUserById = async (req, res) => {
     }
 };
 
+//Description:  Login User
+//Route:        DELETE - api/login
+//Access:       Public
+const login = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (!user || !user.comparePassword(password)) {
+            console.error('Invalid login credentials');
+            return res.status(401).json({ error: 'Invalid Credentials' });
+        }
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: '30d',
+        });
+        res.status(200).json({ token });
+        console.log('Login Successful');
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error });
+    }
+};
+
+// Description: Logout User
+// Route:       POST - api/logout
+// Access:      Private
+const logoutUser = (req, res) => {
+    res.cookie('token','',{
+        httpOnly:true,
+        expires: new Date(0)
+    })
+    res.status(200).json({ message: 'Logout successful' });
+};
+
 module.exports = {
     createUser,
     getAllUsers,
     getUserById,
     updateUserById,
     deleteUserById,
+    login,
+    logoutUser,
 }

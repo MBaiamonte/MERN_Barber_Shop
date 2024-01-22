@@ -1,10 +1,20 @@
-
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React, {useState} from 'react';
+import axios from 'axios';
+import { AuthProvider } from './components/AuthContext';
+import HomePage from './views/HomePage';
+import LoginPage from './views/LoginPage'
 
 function App() {
   return (
-    <div className="App">
-      <h1>hello world!</h1>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<HomePage/>} path="/"/>
+          <Route element={<LoginPage/>} path="/login"/>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
