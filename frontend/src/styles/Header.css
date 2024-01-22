@@ -1,0 +1,33 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Eater&display=swap'); */
+
+@font-face {
+    font-family: 'Spooky'; /* Replace with a name for your font */
+    src: url('/public/fonts/NightmareBeforeChristmas-2v8e.ttf') format('truetype'); /* Adjust the path based on your font file */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo{
+    width: 80px; /* Adjust the width as needed */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 50%;
+    background: linear-gradient(to bottom right, #e6dede, #403f3e);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.store-name{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Spooky', serif;
+}
+.title{
+    font-size: 30px !important;
+    margin-bottom: 0;
+}
+
+.logo-col{
+    margin-right: 5%;
+}
+

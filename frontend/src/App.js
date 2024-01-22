@@ -1,6 +1,4 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import React, {useState} from 'react';
-import axios from 'axios';
 import { AuthProvider } from './components/AuthContext';
 import HomePage from './views/HomePage';
 import LoginPage from './views/LoginPage'

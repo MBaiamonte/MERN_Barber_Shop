@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
-// import {toast, Bounce} from 'react-toastify';
+import {toast, Bounce} from 'react-toastify';
 
 
 export const LoginForm = () => {
@@ -22,23 +22,24 @@ export const LoginForm = () => {
                 const res = await axios.post(`http://localhost:5000/api/login`, {email, password})
                 console.log('Login API Response:', res.data); // Log the entire response to see its structure
                 const token = res.data.token;
-                console.log("Logged in. Token: ", token);
-                login(token);
-                navigate('/')
+                // const user = res.data.userId;
+                // console.log("user:", user)
+                // login(token);
+                navigate('/');
                 console.log('Login Successful')
         } catch (error) {
             console.error('Login failed:', error.message);
-            // toast.error(error.error, {
-            //     position: "top-right",
-            //     autoClose: 5000,
-            //     hideProgressBar: false,
-            //     closeOnClick: true,
-            //     pauseOnHover: true,
-            //     draggable: true,
-            //     progress: undefined,
-            //     theme: "dark",
-            //     transition: Bounce,
-            //     });
+            toast.error(error.error, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+                });
         }
     };
 
