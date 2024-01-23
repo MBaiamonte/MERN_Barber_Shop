@@ -1,11 +1,17 @@
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../components/Header';
+import Welcome from '../components/Welcome';
+import Footer from '../components/Footer';
+
+
+
 
 const HomePage = () => {
     return (
         <>
             <Header/>
-            <h1>homepage</h1>
+            <Welcome/>
+            <Footer/>
         </>
     )
 }

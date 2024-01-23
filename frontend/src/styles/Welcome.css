@@ -1,0 +1,32 @@
+
+@font-face {
+    font-family: 'Spooky'; /* Replace with a name for your font */
+    src: url('/public/fonts/NightmareBeforeChristmas-2v8e.ttf') format('truetype'); /* Adjust the path based on your font file */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.row-1{
+    height: 700px;
+    width: 100vw;
+    background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\welcome_1.webp'); /* Replace with the URL of your image */
+    background-size: cover;
+    background-position: center; 
+    background-attachment: fixed;
+    z-index: -1; 
+    background-position-y: top;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p{
+    margin: 0;
+    font-size: 65px;
+    font-family: 'Spooky', serif;
+    color: #F9F8ED;
+    z-index: 1;
+    text-align: center;
+}
+
+
