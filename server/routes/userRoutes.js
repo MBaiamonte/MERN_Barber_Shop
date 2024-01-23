@@ -7,11 +7,11 @@ const {protect, admin} = require('../middleware/authenticationMiddleware')
 //Middleware To Parse Cookies
 router.use(require('cookie-parser')());
 
-// Create new user
-router.post('/users/create', userController.createUser);
+// Register new user
+router.post('/users/register', userController.registerUser);
 
 //Login user
-router.post('/login', userController.login);
+router.post('/user/login', userController.login);
 
 //Logout User
 router.post('/user/logout', userController.logoutUser)

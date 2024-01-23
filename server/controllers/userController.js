@@ -1,19 +1,23 @@
 const User = require('../models/userModel');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
-//Description:  Create New User
-//Route:        POST - api/users/create
+//Description:  Register New User
+//Route:        POST - api/users/register
 //Access:       Public
-const createUser = async (req, res) => {
-    try {
-        const newUser = new User(req.body);
-        await newUser.save();
-        res.status(201).json(newUser);
-    } catch (error) {
-        console.error('Error creating user:', error);
-        res.status(400).json({ error: 'Unable to create user' });
-    }
+const registerUser = (req, res) => {
+    User.create(req.body)
+        .then(user => {
+            const userToken = jwt.sign({
+                id: user._id
+            }, process.env.JWT_SECRET);
+            res.cookie(userToken, 'userToken', {
+                httpOnly: true
+            }).json({msg: 'successfully registered new user', user:user})
+        })
+        .catch (err => res.json(err));
 };
+
 
 //Description:  Get All Users
 //Route:        GET - api/users/all
@@ -80,37 +84,35 @@ const deleteUserById = async (req, res) => {
 //Route:        DELETE - api/login
 //Access:       Public
 const login = async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email });
-        if (!user || !user.comparePassword(password)) {
-            console.error('Invalid login credentials');
-            return res.status(401).json({ error: 'Invalid Credentials' });
-        }
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d',
-        });
-        res.status(200).json({ token });
-        console.log('Login Successful');
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ error });
+    const user = await User.findOne({email: req.body.email});
+    if(user ===null) {
+        return res.sendStatus(400);
     }
-};
+    const correctPassword = await bcrypt.compare(req.body.password, user.password);
+    if(!correctPassword){
+        return res.sendStatus(400);
+    }
+    const userToken = jwt.sign({
+        id: user._id
+    }, process.env.JWT_SECRET);
+    res.cookie('userToken', userToken,{
+        httpOnly: true
+    }).json({msg: 'Login Successful', userToken})
+
+}
+
 
 // Description: Logout User
 // Route:       POST - api/logout
 // Access:      Private
 const logoutUser = (req, res) => {
-    res.cookie('token','',{
-        httpOnly:true,
-        expires: new Date(0)
-    })
-    res.status(200).json({ message: 'Logout successful' });
-};
+    res.clearCookie('userToken');
+    res.sendStatus(200);
+    console.log('userToken:',userToken)
+}
 
 module.exports = {
-    createUser,
+    registerUser,
     getAllUsers,
     getUserById,
     updateUserById,
