@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Eater&display=swap'); */
 
 @font-face {
     font-family: 'Spooky'; /* Replace with a name for your font */
@@ -6,13 +5,26 @@
     font-weight: normal;
     font-style: normal;
 }
+.navbar{
+    justify-content: space-between !important;
+    height: 100px;
+}
 
 .logo{
     width: 80px; /* Adjust the width as needed */
     height: auto; /* Maintain the aspect ratio */
     border-radius: 50%;
-    background: linear-gradient(to bottom right, #e6dede, #403f3e);
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    /* background: linear-gradient(to bottom right, #e6dede, #403f3e); */
+    /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5); */
+}
+#container {
+    display: flex ;
+    align-items: center;
+    justify-content: space-between ;
+    margin: 0 !important;
+}
+#brand-col{
+    margin: 0 !important;
 }
 
 .store-name{
@@ -21,6 +33,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'Spooky', serif;
+    color: #F9F8ED;
 }
 .title{
     font-size: 30px !important;
@@ -28,6 +41,15 @@
 }
 
 .logo-col{
-    margin-right: 5%;
+    margin-right: 10%;
 }
-
+.nav-btn{
+    font-family: 'Spooky', serif;
+    color: #F9F8ED;
+    font-size: 25px;
+    font-weight: 400 !important;
+}
+.nav-btn:hover{
+    font-size: 30px;
+    color: #F9F8ED;
+}

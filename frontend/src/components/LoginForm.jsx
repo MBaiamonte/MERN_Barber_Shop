@@ -1,55 +1,32 @@
 import FormContainer from './FormContainer'
-import { useAuth } from './AuthContext';
+// import { useAuth } from './AuthContext';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
+// import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
-import {toast, Bounce} from 'react-toastify';
+import '../styles/Login.css';
 
 
 export const LoginForm = () => {
 
 //Declarations and State Management 
-    const {login} = useAuth();
+    // const {login} = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword]= useState('');
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    // const payload = {email, password};
 
     //Handlers and Functions
-    const loginHandler = async (e) => {
-        e.preventDefault();
-        try {
-                const res = await axios.post(`http://localhost:5000/api/login`, {email, password})
-                console.log('Login API Response:', res.data); // Log the entire response to see its structure
-                const token = res.data.token;
-                // const user = res.data.userId;
-                // console.log("user:", user)
-                // login(token);
-                navigate('/');
-                console.log('Login Successful')
-        } catch (error) {
-            console.error('Login failed:', error.message);
-            toast.error(error.error, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                transition: Bounce,
-                });
-        }
-    };
-
+    const loginHandler =() => {
+        console.log('login attempted, finish handler to handle functionality')
+    }
 
     return (
-        <Row className='5'>
-            <Col>
-                {/* image for left side of screen here */}
+        <Row id='container'>
+            <Col id='login-col'>
+                
             </Col>
-            <Col>
+            <Col className='login-col col-6'>
                 <FormContainer>
                 <h1>Welcome Back, Sign In</h1>
                     <Form onSubmit={loginHandler}>

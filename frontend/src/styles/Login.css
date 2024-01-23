@@ -1,0 +1,21 @@
+
+
+#container{
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.login-col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-family: 'Spooky', serif;
+    color: #F9F8ED; */
+}
+#left-col{
+    background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\barber_login.jpg'); /* Replace with the URL of your image */
+    background-size: cover;
+    background-position: center; 
+    background-attachment: fixed;
+}
