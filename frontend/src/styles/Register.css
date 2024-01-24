@@ -1,0 +1,64 @@
+
+.register-container{
+    width: 100vw;
+    height: 100vh;
+    background-color: #7C2B2B;
+    z-index: -2;
+    
+}
+
+/*Left Column Styles*/
+.register-right-col{
+    background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\barber_pole_patent.jpg'); /* Replace with the URL of your image */
+    background-size:cover ;
+    background-position: center; 
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*register Col Styles*/
+.register-col{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Spooky', serif;
+    color: #F9F8ED;
+}
+.register-form-label{
+    font-size: 25px;
+}
+
+.register-form-inputs{
+    font-size:20px ;
+}
+.register-h1{
+    font-size: 50px;
+    margin-bottom: 0;
+}
+.register-p{
+    font-size: 22px;
+}
+.register-btn, .register-btn:hover{
+    font-size: 25px;
+    background-color: #000036;
+    border: none;
+}
+.register-btn:active{
+    transform: scale(.95);
+}
+.register-login{
+    display: flex;
+}
+.register-link{
+    text-decoration: underline;
+    color: #F9F8ED;
+}
+.register-link:hover{
+    font-size: 30px;
+}
