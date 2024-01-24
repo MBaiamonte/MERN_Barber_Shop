@@ -8,9 +8,9 @@ const Welcome = () => {
         <>
             <Row className='row-1'>
                 {/* <div className='center-content'> */}
-                    <p>
+                    <p className='welcome-p'>
                         Your only as good as your last Haircut
-                        <p>- Edward ScissorHands</p>
+                        <p className='welcome-p'>- Edward ScissorHands</p>
                         <Button style={{backgroundColor: 'white'}}><Link to='/appointments'>Book Now</Link></Button>
                     </p>
                 {/* </div> */}

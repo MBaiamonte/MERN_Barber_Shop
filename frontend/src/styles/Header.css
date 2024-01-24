@@ -7,7 +7,7 @@
 }
 .navbar{
     justify-content: space-between !important;
-    height: 100px;
+    height: 100px !important;
 }
 
 .logo{
@@ -22,6 +22,7 @@
     align-items: center;
     justify-content: space-between ;
     margin: 0 !important;
+    height: 100px !important;
 }
 #brand-col{
     margin: 0 !important;

@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
 }
-p{
+.welcome-p{
     margin: 0;
     font-size: 65px;
     font-family: 'Spooky', serif;

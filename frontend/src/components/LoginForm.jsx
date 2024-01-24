@@ -1,7 +1,5 @@
-import FormContainer from './FormContainer'
-// import { useAuth } from './AuthContext';
+import FormContainer from './FormContainer';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-// import axios from 'axios';
 import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
 import '../styles/Login.css';
@@ -22,16 +20,16 @@ export const LoginForm = () => {
     }
 
     return (
-        <Row id='container'>
-            <Col id='left-col'></Col>
+        <Row className='login-container'>
+            <Col className='login-left-col'></Col>
             <Col className='login-col col-8'>
                 <FormContainer>
-                <h1>Sign In</h1>
+                <h1 className='login-h1'>Sign In</h1>
                     <Form onSubmit={loginHandler}>
                         <Form.Group controlId='email' className='my-3'>
-                            <Form.Label >Email:</Form.Label>
+                            <Form.Label className='login-form-label' >Email:</Form.Label>
                                 <Form.Control
-                                    className='form-inputs'
+                                    className='login-form-inputs'
                                     type='email' 
                                     placeholder='Enter Email' 
                                     value={email} 
@@ -39,22 +37,22 @@ export const LoginForm = () => {
                                 </Form.Control>
                         </Form.Group>
                         <Form.Group controlId='password' className='my-3'>
-                            <Form.Label className='form-label'>Password</Form.Label>
+                            <Form.Label className='login-form-label'>Password</Form.Label>
                                 <Form.Control
-                                    className='form-inputs'
+                                    className='login-form-inputs'
                                     type='password' 
                                     placeholder='Enter Password' 
                                     value={password} 
                                     onChange={(e)=>setPassword(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
-                        <Button id='btn' type='submit' variant='primary' className='mt-2' > Sign In </Button>
+                        <Button className='login-btn' type='submit' variant='primary' > Sign In </Button>
                     </Form>
                     <Row className='py-3'>
                         <Col >
-                            <div className='register'>
-                                <p>
-                                    New Customer? <Link to={'/register'} className='link'>Register Here</Link>
+                            <div className='login-register'>
+                                <p className='login-p'>
+                                    New Customer? <Link to={'/register'} className='login-link'>Register Here</Link>
                                 </p>
                             </div>
                         </Col>
