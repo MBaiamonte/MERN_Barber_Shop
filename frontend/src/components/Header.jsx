@@ -20,7 +20,7 @@ const Header = () => {
 
 
     return (
-        <Navbar  className='d-inline-flex d-flex justify-content-between' fixed="top" variant='dark' expand='lg' collapseOnSelect style={{backgroundColor: '#7C2B2B'}}>
+        <Navbar  className='d-inline-flex d-flex justify-content-between'  variant='dark' expand='lg' collapseOnSelect style={{backgroundColor: '#7C2B2B'}}>
             <Container id='container'>
 
                     <LinkContainer to='/'>
