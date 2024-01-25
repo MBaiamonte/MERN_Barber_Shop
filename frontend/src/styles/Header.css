@@ -8,6 +8,7 @@
 .navbar{
     justify-content: space-between !important;
     height: 100px !important;
+    width: 100vw;
 }
 
 .logo{

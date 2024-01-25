@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please enter a password'],
-        minlength: [8, 'Password must be at least 8 characters long'],
+        // minlength: [8, 'Password must be at least 8 characters long'],
         // validate: {
         //     validator: function (value) {
         //         // You can add custom password strength validation here
@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
         //     },
         //     message: 'Password must contain at least one lowercase letter, one uppercase letter, and one digit',
         // },
+
     },
     isAdmin:{
         type:Boolean,
@@ -43,24 +44,24 @@ const userSchema = new mongoose.Schema({
     timestamps:true
 });
 
-userSchema.virtual('confirmPassword')
-    .get( () => this._confirmPassword)
-    .set( (value) => {this._confirmPassword = value});
+// userSchema.virtual('confirmPassword')
+//     .get( () => this._confirmPassword)
+//     .set( (value) => {this._confirmPassword = value});
 
-userSchema.pre('validate', function(next) {
-    if(this.password != this._confirmPassword){
-        this.validate('confirmPassword', 'Password must match confirm password');
-    }
-    next();
-});
+// userSchema.pre('validate', function(next) {
+//     if(this.password != this._confirmPassword){
+//         this.validate('confirmPassword', 'Password must match confirm password');
+//     }
+//     next();
+// });
 
-userSchema.pre('save', function(next){
-    bcrypt.hash(this.password, 10)
-        .then(hash => {
-            this.password = hash;
-            next()
-        });
-});
+// userSchema.pre('save', function(next){
+//     bcrypt.hash(this.password, 10)
+//         .then(hash => {
+//             this.password = hash;
+//             next()
+//         });
+// });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
