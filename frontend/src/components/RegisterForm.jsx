@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import FormContainer from './FormContainer';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import {Link, useNavigate} from 'react-router-dom'
-import '../styles/Register.css'
+import {Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import '../styles/Register.css';
 
 
 const RegisterForm = () => {
@@ -17,8 +18,19 @@ const RegisterForm = () => {
     //Handlers and Functions
     const registerHandler =(e) => {
         e.preventDefault();
-        console.log('register attempted, finish handler to handle functionality')
+        axios.post('http://localhost:5000/api/users/register', {fullName, email, password})
+            .then( res => {
+                console.log(res);
+                console.log(res.body)
+            })
+            .catch(err => console.log('with registration: ', err ))
     }
+
+
+    // setFullName('');
+    // setEmail('')
+    // setPassword('')
+    // setConfirmPassword('')
 
     return (
         <Row className='register-container'>
