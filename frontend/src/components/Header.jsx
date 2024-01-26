@@ -47,7 +47,7 @@ const Header = () => {
                     <Nav.Link className='nav-btn'>Contact Us</Nav.Link>
                 </LinkContainer>
 
-                <LinkContainer to='/login'>
+                <LinkContainer to='/aboutUs'>
                     <Nav.Link className='nav-btn'>About Us</Nav.Link>
                 </LinkContainer>
 
