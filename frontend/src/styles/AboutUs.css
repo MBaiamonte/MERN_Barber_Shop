@@ -35,10 +35,13 @@ body{
     width: 100%; 
     height: auto;
     border-radius: 50%;
-    background: linear-gradient(to bottom right,  #6262be,  #000036);
+    background: linear-gradient(to bottom right,  #6589d8,  #000036);
     max-height: 550px;
     max-width: 550px;
     align-self: center;
 }
-
+.image-col{
+    display: flex;
+    justify-content: center;
+}
 

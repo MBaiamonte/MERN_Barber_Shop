@@ -37,7 +37,7 @@ const AboutUs = () => {
                             </p>
                         </Col>
                 </Col>
-                <Col className='col-5 d-flex'>
+                <Col className='col-5  image-col'>
                     <Image src={imagePath}  alt='About Us Logo'roundedCircle className="about-image"></Image>
                 </Col>
             </Row>
