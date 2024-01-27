@@ -11,10 +11,8 @@ const registerUser = (req, res) => {
         .catch(err => res.status(400).json(err));
 }
 
-
-
 //Description:  Get All Users
-//Route:        GET - api/users/all
+//Route:        GET - api/users/all 
 //Access:       Public
 const getAllUsers = async (req, res) => {
     try {
@@ -79,31 +77,28 @@ const deleteUserById = async (req, res) => {
 //Access:       Public
 const login = async (req, res) => {
     const user = await User.findOne({email: req.body.email});
-    if(user ===null) {
-        return res.sendStatus(400);
+    if(user === null) {
+        return res.status(400).json({message: 'login email input does not exist in db' });
     }
     const correctPassword = await bcrypt.compare(req.body.password, user.password);
     if(!correctPassword){
-        return res.sendStatus(400);
+        return res.status(400).json({message: 'password does not match that email' });
     }
     const userToken = jwt.sign({
         id: user._id
     }, process.env.JWT_SECRET);
     res.cookie('userToken', userToken,{
         httpOnly: true
-    }).json({msg: 'Login Successful', userToken})
-
-}
-
+    }).json({message: 'Login Successful!', userToken})
+};
 
 // Description: Logout User
 // Route:       POST - api/logout
 // Access:      Private
 const logoutUser = (req, res) => {
     res.clearCookie('userToken');
-    res.sendStatus(200);
-    console.log('userToken:',userToken)
-}
+    res.status(200).json({message : "Logout Successful!"});
+};
 
 module.exports = {
     registerUser,
