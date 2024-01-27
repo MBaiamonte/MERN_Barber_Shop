@@ -7,16 +7,10 @@ const bcrypt = require('bcrypt');
 //Access:       Public
 const registerUser = (req, res) => {
     User.create(req.body)
-        .then(user => {
-            const userToken = jwt.sign({
-                id: user._id
-            }, process.env.JWT_SECRET);
-            res.cookie(userToken, 'userToken', {
-                httpOnly: true
-            }).json({msg: 'successfully registered new user', user:user})
-        })
-        .catch (err => res.json(err));
-};
+        .then( user => res.json({ msg: "user successfully registered", user:user}))
+        .catch(err => res.status(400).json(err));
+}
+
 
 
 //Description:  Get All Users

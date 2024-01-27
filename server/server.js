@@ -1,7 +1,7 @@
 const express= require('express');
 const cors = require('cors');
 const dotenv = require("dotenv");
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const connectDB = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
