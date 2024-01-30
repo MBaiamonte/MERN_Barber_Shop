@@ -3,20 +3,34 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
 import '../styles/Login.css';
+import axios from 'axios';
 
 
-export const LoginForm = () => {
+export const LoginForm = ({setLoggedUser}) => {
 
 //Declarations and State Management 
-    // const {login} = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword]= useState('');
-    // const navigate = useNavigate();
-    // const payload = {email, password};
+    const navigate = useNavigate();
+
 
     //Handlers and Functions
-    const loginHandler =() => {
-        console.log('login attempted, finish handler to handle functionality')
+    const loginHandler =(e) => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/api/user/login', {email, password}, {withCredentials: true})
+            .then( res =>{
+                const userToLogin = {
+                    fullName: res.data.fullName,
+                    email: res.data.email,
+                    userId: res.data._id,
+                }
+                console.log(res.data)
+                setLoggedUser(userToLogin);
+                navigate('/')
+            })
+            .catch(err =>{
+                console.log('error with login:', err )
+            })
     }
 
     return (

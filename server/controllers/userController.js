@@ -89,7 +89,7 @@ const login = async (req, res) => {
     }, process.env.JWT_KEY);
     res.cookie('userToken', userToken,{
         httpOnly: true
-    }).json({message: 'Login Successful!', userToken})
+    }).json({message: 'Login Successful!', userToken, userId:user._id})
 };
 
 // Description: Logout User
