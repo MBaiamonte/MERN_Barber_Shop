@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const {authenticate: authenticate} = require('../config/jwt')
 
 
 // Register new user
@@ -13,7 +14,7 @@ router.post('/user/login', userController.login);
 router.post('/user/logout', userController.logoutUser)
 
 // Get all users
-router.get('/users/all', userController.getAllUsers);
+router.get('/users/all', authenticate, userController.getAllUsers);
 
 // Get on users by  user ID
 router.get('/users/:id', userController.getUserById);

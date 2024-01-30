@@ -1,13 +1,11 @@
 const express= require('express');
+require('dotenv').config();
 const cors = require('cors');
-const dotenv = require("dotenv");
 const connectDB = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const serviceRoutes = require('./routes/serviceRoutes')
 const appointmentRoutes = require('./routes/appointmentRoutes')
-
-dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000
 

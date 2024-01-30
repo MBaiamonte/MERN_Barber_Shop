@@ -4,6 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
+import { toast } from 'react-toastify';
 
 
 const RegisterForm = () => {
@@ -16,21 +17,9 @@ const RegisterForm = () => {
     const navigate = useNavigate();
 
     //Handlers and Functions
-    const registerHandler =(e) => {
-        e.preventDefault();
-        axios.post('http://localhost:5000/api/users/register', {fullName, email, password})
-            .then( res => {
-                console.log(res);
-                console.log(res.body)
-            })
-            .catch(err => console.log('with registration: ', err ))
+    const registerHandler = (e) => {
+        console.log('clicked reg button ')
     }
-
-
-    // setFullName('');
-    // setEmail('')
-    // setPassword('')
-    // setConfirmPassword('')
 
     return (
         <Row className='register-container'>
@@ -54,7 +43,7 @@ const RegisterForm = () => {
                                     className='register-form-inputs'
                                     type='email' 
                                     placeholder='Enter Email' 
-                                    value={email} 
+                                    value={email}  
                                     onChange={(e)=>setEmail(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
