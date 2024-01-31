@@ -4,11 +4,14 @@ import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
 import '../styles/Login.css';
 import axios from 'axios';
+import { useUser } from './UserContext';
 
 
-export const LoginForm = ({setLoggedUser}) => {
+export const LoginForm = () => {
 
 //Declarations and State Management 
+    const {setLoginUserId} = useUser();
+
     const [email, setEmail] = useState('');
     const [password, setPassword]= useState('');
     const navigate = useNavigate();
@@ -20,16 +23,15 @@ export const LoginForm = ({setLoggedUser}) => {
         axios.post('http://localhost:5000/api/user/login', {email, password}, {withCredentials: true})
             .then( res =>{
                 const userToLogin = {
-                    fullName: res.data.fullName,
-                    email: res.data.email,
-                    userId: res.data._id,
-                }
-                console.log(res.data)
-                setLoggedUser(userToLogin);
-                navigate('/')
+                    userId: res.data.userId,
+                };
+                console.log('res.data:', res.data);
+                setLoginUserId(res.data.userId);
+                console.log('loginUserId: ',res.data.userId);
+                navigate(`/profile/${userToLogin.userId}`);
             })
             .catch(err =>{
-                console.log('error with login:', err )
+                console.log('error with login:', err );
             })
     }
 

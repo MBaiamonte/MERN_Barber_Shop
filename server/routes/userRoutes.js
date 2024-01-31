@@ -16,7 +16,7 @@ router.post('/user/logout', userController.logoutUser)
 // Get all users
 router.get('/users/all', authenticate, userController.getAllUsers);
 
-// Get on users by  user ID
+// Get one users by  user ID
 router.get('/users/:id', userController.getUserById);
 
 // Update one user by ID
