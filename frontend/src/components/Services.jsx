@@ -9,6 +9,7 @@ const Services = () => {
     const [allServices, setAllServices] = useState([]);
     const navigate = useNavigate();
 
+
     useEffect(()=>{
         const fetchData = async () =>{
             try{
