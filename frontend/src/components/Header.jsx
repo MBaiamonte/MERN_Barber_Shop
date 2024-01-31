@@ -4,19 +4,35 @@ import {Nav, Navbar, NavDropdown, Col, Container } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '../styles/Header.css';
 import axios from 'axios';
+import {useUser} from '../components/UserContext';
 
 
 const Header = () => {
     //Declarations 
-    // const {userInfo, logout} = useAuth();
     const navigate= useNavigate();
+    const { loginUserId } = useUser();
 
 
     //Handlers and functions
     const logoutHandler = async ()=>{
-        await axios.post('http://localhost:5000/api/user/logout')
-        navigate('/login')
-    }
+        await axios.post('http://localhost:5000/api/user/logout', {}, {withCredentials: true})
+            .then( res =>{
+                navigate('/login')
+            })
+            .catch(err =>{
+                console.log('error with logout: ', err)
+            })
+    }//end logout handler
+
+    const redirectToProfile = () => {
+        if (loginUserId) {
+            navigate(`/profile/${loginUserId}`);
+        } else {
+          // Handle case where loginUserId is not available (not logged in)
+          // You may redirect to the login page or handle it as per your application's logic
+            console.log('User not logged in');
+        }
+    };
 
 
     return (
@@ -53,9 +69,9 @@ const Header = () => {
 
                 <NavDropdown title="User Stuff" id="basic-nav-dropdown" className='nav-btn ml-5'>
                     <NavDropdown.Item href='/login'>Login</NavDropdown.Item>
-                    <NavDropdown.Item href="/profile"> User Dashboard</NavDropdown.Item>
+                    <NavDropdown.Item onClick={redirectToProfile}> User Dashboard</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </NavDropdown>
             </Container>
         </Navbar>
