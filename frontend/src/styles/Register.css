@@ -27,11 +27,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Spooky', serif;
     color: #F9F8ED;
 }
 .register-form-label{
     font-size: 25px;
+    font-family: 'Spooky', serif;
 }
 
 .register-form-inputs{
@@ -40,17 +40,21 @@
 .register-h1{
     font-size: 50px;
     margin-bottom: 0;
+    font-family: 'Spooky', serif;
 }
 .register-p{
     font-size: 25px;
+    font-family: 'Spooky', serif;
 }
-.register-btn, .register-btn:hover{
+.register-btn, .register-btn:hover {
     font-size: 25px;
     background-color: #000036;
     border: none;
+    font-family: 'Spooky', serif;
 }
 .register-btn:active{
     transform: scale(.95);
+    background-color: #000036;
 }
 .register-login{
     display: flex;
@@ -60,5 +64,10 @@
     color: #F9F8ED;
 }
 .register-link:hover{
-    font-size: 30px;
+    color: #000036;
+}
+.register-login{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

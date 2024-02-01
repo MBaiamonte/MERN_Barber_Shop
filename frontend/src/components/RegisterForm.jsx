@@ -67,7 +67,7 @@ const RegisterForm = () => {
                                     onChange={(e)=>setConfirmPassword(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
-                        <Button className='register-btn' type='submit' variant='primary' > Register </Button>
+                        <Button className='register-btn' type='submit'> Register </Button>
                     </Form>
                     <Row className='py-3'>
                         <Col >
@@ -75,10 +75,13 @@ const RegisterForm = () => {
                                 <p className='register-p'>
                                     Already A Customer? <Link to={'/login'} className='register-link'>Login</Link>
                                 </p>
+                                <p className='register-p'>
+                                    Continue as guest? <Link to={'/'} className='register-link'>Homepage</Link>
+                                </p>
                             </div>
                         </Col>
                     </Row>
-                </FormContainer>
+                </FormContainer> 
             </Col>
             <Col className='register-right-col'></Col>
         </Row>
