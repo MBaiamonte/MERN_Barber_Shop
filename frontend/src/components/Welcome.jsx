@@ -2,22 +2,26 @@ import React from 'react';
 import {Row,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import '../styles/Welcome.css';
+import {useUser} from '../components/UserContext';
 
 const Welcome = () => {
+    //Declarations
+    const { loginUserId } = useUser();
     return (
         <>
             <Row className='row-1'>
-                {/* <div className='center-content'> */}
                     <p className='welcome-p'>
                         Your only as good as your last Haircut
-                        <p className='welcome-p'>- Edward ScissorHands</p>
-                        <Button style={{backgroundColor: 'white'}}><Link to='/appointments'>Book Now</Link></Button>
+                        <p className='welcome-p'>Edward ScissorHands</p>
+                        {loginUserId === null ? (
+                            <Button style={{backgroundColor: 'white'}}><Link to='/login'>Login To Book Appointment</Link></Button>
+                        ) : (
+                            <Button style={{backgroundColor: 'white'}}><Link to='/appointments'>Book Now</Link></Button>
+                        )}
                     </p>
-                {/* </div> */}
-                
             </Row>
         </>
     )
 }
 
-export default Welcome
+export default Welcome;
