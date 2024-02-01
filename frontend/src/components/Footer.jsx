@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         
         <div className='d-flex ' style={{height: '50px', backgroundColor:'lightblue'}}>
-            <h5>Footer</h5>
+            
         </div>
     ) 
 }

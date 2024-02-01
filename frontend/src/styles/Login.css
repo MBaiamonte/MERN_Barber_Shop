@@ -15,7 +15,7 @@
     background-repeat: no-repeat;
     height: 100vh;
     width: 100%;
-    z-index: 1;
+    z-index: 1; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,37 +26,43 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Spooky', serif;
+    /* font-family: 'Spooky', serif; */
     color: #F9F8ED;
 }
 .login-form-label{
     font-size: 30px;
+    font-family: 'Spooky', serif;
 }
 
 .login-form-inputs{
-    font-size:25px ;
+    font-size:18px ;
 }
 .login-h1{
     font-size: 60px;
+    font-family: 'Spooky', serif;
 }
 .login-p{
     font-size: 22px;
+    font-family: 'Spooky', serif;
 }
 .login-btn, .login-btn:hover{
     font-size: 25px;
     background-color: #000036;
     border: none;
+    font-family: 'Spooky', serif;
 }
 .login-btn:active{
     transform: scale(.95);
 }
 .login-register{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .login-link{
     text-decoration: underline;
     color: #F9F8ED;
 }
 .login-link:hover{
-    font-size: 30px;
+    color: #000036;
 }

@@ -1,5 +1,5 @@
 import FormContainer from './FormContainer';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col, FormGroup } from 'react-bootstrap';
 import React, {useState} from 'react';
 import {useNavigate , Link} from 'react-router-dom';
 import '../styles/Login.css';
@@ -41,7 +41,7 @@ export const LoginForm = () => {
                 <h1 className='login-h1'>Sign In</h1>
                     <Form onSubmit={loginHandler}>
                         <Form.Group controlId='email' className='my-3'>
-                            <Form.Label className='login-form-label' >Email:</Form.Label>
+                            <Form.Label className='login-form-label' >Email</Form.Label>
                                 <Form.Control
                                     className='login-form-inputs'
                                     type='email' 
@@ -60,13 +60,16 @@ export const LoginForm = () => {
                                     onChange={(e)=>setPassword(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
-                        <Button className='login-btn' type='submit' variant='primary' > Sign In </Button>
+                        <Button className='login-btn' type='submit' > Sign In </Button>
                     </Form>
                     <Row className='py-3'>
                         <Col >
                             <div className='login-register'>
                                 <p className='login-p'>
                                     New Customer? <Link to={'/register'} className='login-link'>Register Here</Link>
+                                </p>
+                                <p className='login-p'>
+                                    Continue as guest? <Link to={'/'} className='login-link'>Homepage</Link>
                                 </p>
                             </div>
                         </Col>
