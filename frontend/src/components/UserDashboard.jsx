@@ -5,7 +5,7 @@ import {useUser} from '../components/UserContext';
 import {Container, Row, Col, Button, Form, Card, Table} from 'react-bootstrap'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-
+import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
     //declarations
@@ -50,36 +50,39 @@ const UserDashboard = () => {
 
 
     return (
-        <Container style={{backgroundColor: 'aquamarine'}}>
-            <Row>
-                <h1>Welcome {fullName} </h1>
-                <Link><Button>Book New Appointment!</Button></Link>
-
+        <Container className='profile-container'>
+            <Row className='profile-header'>
+                <Col className='col-7 header-col'>
+                    <h1 id='profile-title-h1'>Welcome, {fullName}</h1>
+                </Col>
+                {/* <Col className='col-4 header-col'>
+                    <Link><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
+                </Col> */}
             </Row>
-            <Row>
+            <Row className='profile-body'>
                 <Col className='col-4'>
-                    <Card style={{ width: '18rem' }}>
+                    <Card className='profile-update-card' style={{ width: '18rem' }}>
                         <Card.Body>
-                            <Card.Title>Update your info</Card.Title>
+                            <Card.Title id='profile-card-title'>Update your info</Card.Title>
                             <Card.Text>
                                 <Form onSubmit={updateFormHandler}>
                                     <Form.Group className="mb-3" controlId="fullName">
-                                        <Form.Label>Full Name</Form.Label>
+                                        <Form.Label className='profile-label'>Full Name</Form.Label>
                                         <Form.Control type="text" placeholder={fullName} value={fullName} onChange={(e) => setFullName(e.target.value)} />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="email">
-                                        <Form.Label>Email</Form.Label>
+                                        <Form.Label className='profile-label'>Email</Form.Label>
                                         <Form.Control type="email" placeholder={email} value={email} onChange={(e) => setEmail(e.target.value)}/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="phoneNumber">
-                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Label className='profile-label'>Phone Number</Form.Label>
                                         <PhoneInput placeholder="Add your phone number" defaultCountry="US" value={phoneNumber} onChange={ (e) => setPhoneNumber(e.target.value)}/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>Password</Form.Label>
+                                        <Form.Label className='profile-label'>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Enter password"/>
                                     </Form.Group>
                     {/* add conditions disabled button button if password not entered */}
@@ -114,6 +117,9 @@ const UserDashboard = () => {
                             </tr>
                         </tbody>
                         </Table>
+                        <Col className='col-4 '>
+                            <Link><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
+                        </Col>
                 </Col>
             </Row>
         </Container>
