@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import '../styles/Welcome.css'
+import '../styles/Welcome.css';
 
 const Welcome = () => {
     return (

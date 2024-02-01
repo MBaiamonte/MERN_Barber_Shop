@@ -18,7 +18,7 @@ const RegisterForm = () => {
 
     //Handlers and Functions
     const registerHandler = (e) => {
-        console.log('clicked reg button ')
+        console.log('clicked reg button ');
     }
 
     return (
@@ -85,4 +85,4 @@ const RegisterForm = () => {
     )
 }
 
-export default RegisterForm
+export default RegisterForm;

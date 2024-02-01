@@ -1,9 +1,10 @@
 import React from 'react';
 import {Row, Col, Image} from 'react-bootstrap';
-import '../styles/AboutUs.css'
+import '../styles/AboutUs.css';
 
 const AboutUs = () => {
-    const imagePath = '/images/barber_shop_logo.png'
+    //Declarations
+    const imagePath = '/images/barber_shop_logo.png';
     return (
             <Row className='about-container'>
                 <Col className='  col-7 d-flex flex-column'>
@@ -44,4 +45,4 @@ const AboutUs = () => {
     )
 }
 
-export default AboutUs
+export default AboutUs;

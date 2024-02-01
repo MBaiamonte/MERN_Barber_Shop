@@ -8,10 +8,8 @@ import { useUser } from './UserContext';
 
 
 export const LoginForm = () => {
-
-//Declarations and State Management 
+    //Declarations
     const {setLoginUserId} = useUser();
-
     const [email, setEmail] = useState('');
     const [password, setPassword]= useState('');
     const navigate = useNavigate();
@@ -76,6 +74,7 @@ export const LoginForm = () => {
                 </FormContainer>
             </Col>
         </Row>
-        
     )
 }
+
+export default LoginForm;

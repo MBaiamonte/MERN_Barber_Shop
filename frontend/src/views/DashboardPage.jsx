@@ -1,7 +1,7 @@
-import React from 'react'
-import UserDashboard from '../components/UserDashboard'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import React from 'react';
+import UserDashboard from '../components/UserDashboard';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const DashboardPage = () => {
     return (
@@ -13,4 +13,4 @@ const DashboardPage = () => {
     )
 }
 
-export default DashboardPage
+export default DashboardPage;

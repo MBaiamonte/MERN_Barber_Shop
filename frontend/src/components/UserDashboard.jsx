@@ -1,19 +1,19 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import {useUser} from '../components/UserContext';
-import {Container, Row, Col, Button, Form, Card, Table} from 'react-bootstrap'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import {Container, Row, Col, Button, Form, Card, Table} from 'react-bootstrap';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import '../styles/UserDashboard.css';
 
 const UserDashboard = () => {
     //declarations
     const { loginUserId } = useUser();
-    const [userData,setUserData] = useState(null)
-    const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState()
+    const [userData,setUserData] = useState(null);
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState();
 
 
 
@@ -28,14 +28,14 @@ const UserDashboard = () => {
                     //     fullName: res.data.fullName,
                     //     email: res.data.email,
                     // };
-                    setFullName(res.data.fullName)
-                    setEmail(res.data.email)
-                    setPhoneNumber(res.data.phoneNumber)
+                    setFullName(res.data.fullName);
+                    setEmail(res.data.email);
+                    setPhoneNumber(res.data.phoneNumber);
                     // Use a callback in setUserData to handle the asynchronous nature
                     // setUserData(prevUserData => {
                     //     console.log("userData state: ", prevUserData);
                     //     return user;
-                    setUserData(res.data)
+                    setUserData(res.data);// this might contain the hashed, verify that it dosent and remove if it does
                     // });
                 })
                 .catch(error => {
@@ -45,7 +45,7 @@ const UserDashboard = () => {
     }, [loginUserId]);
 
     const updateFormHandler = (e)=>{
-        console.log('update submit clicked, finish handler have it do something')
+        console.log('update submit clicked, finish handler have it do something');
     }
 
 
@@ -55,9 +55,6 @@ const UserDashboard = () => {
                 <Col className='col-7 header-col'>
                     <h1 id='profile-title-h1'>Welcome, {fullName}</h1>
                 </Col>
-                {/* <Col className='col-4 header-col'>
-                    <Link><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
-                </Col> */}
             </Row>
             <Row className='profile-body'>
                 <Col className='col-4'>

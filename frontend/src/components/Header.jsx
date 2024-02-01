@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Nav, Navbar, NavDropdown, Col, Container } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '../styles/Header.css';
@@ -18,7 +18,7 @@ const Header = () => {
         try {
             await axios.post('http://localhost:5000/api/user/logout');
             setLoginUserId(null); // Clear loginUserId in the context
-            console.log('frontend and logout button passed without issue')
+            console.log('frontend and logout button passed without issue');
             navigate('/login');
         } catch (error) {
             console.log('Error logging out:', error);

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import AboutUs from '../components/AboutUs';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
 const AboutUsPage = () => {
     return (
         <>
@@ -12,4 +12,4 @@ const AboutUsPage = () => {
     )
 }
 
-export default AboutUsPage
+export default AboutUsPage;

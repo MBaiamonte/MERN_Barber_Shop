@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Card, Button, Row} from 'react-bootstrap'
+import {Card, Button} from 'react-bootstrap';
 import axios from 'axios';
 import '../styles/Services.css';
 import {Link} from 'react-router-dom';
@@ -15,9 +15,9 @@ const Services = () => {
             try{
                 const response = await axios.get('http://localhost:5000/api/services/all');
                 console.log('get all services value: ', response.data);
-                setAllServices(response.data)
+                setAllServices(response.data);
             } catch (error){
-                console.error('Error fetching service data: ', error.message)
+                console.error('Error fetching service data: ', error.message);
             }
         }
         fetchData();
@@ -47,9 +47,8 @@ const Services = () => {
                 )
             })}
         </div>
-
     </div>
     )
 }
 
-export default Services
+export default Services;
