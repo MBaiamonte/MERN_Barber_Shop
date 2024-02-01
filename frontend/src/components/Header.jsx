@@ -34,7 +34,6 @@ const Header = () => {
         }
     };
 
-
     return (
         <Navbar  className='d-inline-flex d-flex justify-content-between'  variant='dark' expand='lg' collapseOnSelect style={{backgroundColor: '#7C2B2B'}}>
             <Container id='container'>
@@ -51,9 +50,16 @@ const Header = () => {
                         </Navbar.Brand>
                     </LinkContainer>
                 
-                <LinkContainer to='/booking'>
-                    <Nav.Link className='nav-btn'>Appointments</Nav.Link>
-                </LinkContainer>
+                    {/* conditional rendering for appointments button in header */}
+                    {loginUserId === null ? (
+                        //if not logged in show nothing
+                        <></>
+                    ) : (
+                        //if logged in show appointments button
+                        <LinkContainer to='/booking'>
+                            <Nav.Link className='nav-btn'>Appointments</Nav.Link>
+                        </LinkContainer>
+                    )}
 
                 <LinkContainer to='/services'>
                     <Nav.Link className='nav-btn'>Services</Nav.Link>
@@ -67,12 +73,20 @@ const Header = () => {
                     <Nav.Link className='nav-btn'>About Us</Nav.Link>
                 </LinkContainer>
 
-                <NavDropdown title="User Stuff" id="basic-nav-dropdown" className='nav-btn ml-5'>
-                    <NavDropdown.Item href='/login'>Login</NavDropdown.Item>
-                    <NavDropdown.Item onClick={redirectToProfile}> User Dashboard</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-                </NavDropdown>
+                {/* conditional rendering for login and user dropdown */}
+                {loginUserId === null ? (
+                    // show login button if id is null
+                    <LinkContainer to='/login'>
+                        <Nav.Link className='nav-btn'>Login</Nav.Link>
+                    </LinkContainer>
+                ) : (
+                    // if logged in show profile button with routes to dashboard and logout
+                    <NavDropdown title="Profile" id="basic-nav-dropdown" className='nav-btn ml-5'>
+                        <NavDropdown.Item onClick={redirectToProfile}> User Dashboard</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    </NavDropdown>
+                )}
             </Container>
         </Navbar>
     )
