@@ -10,26 +10,26 @@ import {useUser} from '../components/UserContext';
 const Header = () => {
     //Declarations 
     const navigate= useNavigate();
-    const { loginUserId } = useUser();
+    const { loginUserId, setLoginUserId } = useUser();
 
 
     //Handlers and functions
-    const logoutHandler = async ()=>{
-        await axios.post('http://localhost:5000/api/user/logout', {}, {withCredentials: true})
-            .then( res =>{
-                navigate('/login')
-            })
-            .catch(err =>{
-                console.log('error with logout: ', err)
-            })
-    }//end logout handler
+    const logoutHandler = async () => {
+        try {
+            await axios.post('http://localhost:5000/api/user/logout');
+            setLoginUserId(null); // Clear loginUserId in the context
+            console.log('frontend and logout button passed without issue')
+            navigate('/login');
+        } catch (error) {
+            console.log('Error logging out:', error);
+        }
+    };
 
     const redirectToProfile = () => {
         if (loginUserId) {
             navigate(`/profile/${loginUserId}`);
         } else {
           // Handle case where loginUserId is not available (not logged in)
-          // You may redirect to the login page or handle it as per your application's logic
             console.log('User not logged in');
         }
     };
