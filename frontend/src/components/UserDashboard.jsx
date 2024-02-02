@@ -17,6 +17,7 @@ const UserDashboard = () => {
     const [allAppointments, setAllAppointments] = useState([])
     const [serviceDetails, setServiceDetails] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [password, setPassword] = useState('');
 
 
     //functions and handlers
@@ -27,10 +28,8 @@ const UserDashboard = () => {
                 .then(appointmentsRes => {
                     console.log('appointment data:' , appointmentsRes.data)
                     setAllAppointments(appointmentsRes.data);
-
                     // Extract unique service ids
                     const serviceIds = [...new Set(appointmentsRes.data.map(appointment => appointment.service))];
-
                     // Fetch service details for each id
                     const serviceRequests = serviceIds.map(serviceId =>
                         axios.get(`http://localhost:5000/api/services/${serviceId}`)
@@ -42,7 +41,6 @@ const UserDashboard = () => {
                         console.log('Service Details:', serviceDetails);
                         setServiceDetails(serviceDetails);
                         setIsLoading(false);
-
                     })
                     .catch(error => {
                         console.log('Error getting service details:', error);
@@ -69,9 +67,22 @@ const UserDashboard = () => {
         }
     }, [loginUserId]);
 
-    const updateFormHandler = (e)=>{
-        console.log('update submit clicked, finish handler have it do something');
-    }
+    const updateFormHandler = async (e) => {
+        e.preventDefault();
+        // Check if the password is entered
+        if (!password) {
+            console.log('Please enter your password');
+            return;
+        }
+        try {
+            // Add a password field to the request
+            const response = await axios.put(`http://localhost:5000/api/users/update/${loginUserId}`, { fullName, email, phoneNumber, password });
+    
+            console.log('Updated user:', response.data);
+        } catch (error) {
+            console.log('Update person error', error);
+        }
+    };
 
     if (isLoading) {
         return <p>Loading...</p>; // Render a loading message or spinner while data is being fetched
@@ -102,15 +113,15 @@ const UserDashboard = () => {
 
                                     <Form.Group className="mb-3" controlId="phoneNumber">
                                         <Form.Label className='profile-label'>Phone Number</Form.Label>
-                                        <PhoneInput placeholder="Add your phone number" defaultCountry="US" value={phoneNumber} onChange={ (e) => setPhoneNumber(e.target.value)}/>
+                                        <PhoneInput placeholder="Add your phone number" defaultCountry="US" value={phoneNumber || ''} onChange={(value) => setPhoneNumber(value)}/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label className='profile-label'>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Enter password"/>
+                                        <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                     </Form.Group>
                     {/* add conditions disabled button button if password not entered */}
-                                    <Button variant="primary" type="submit">Update info</Button>
+                                    <Button type="submit">Update info</Button>
                                 </Form>
                             </Card.Text>
                         </Card.Body>
