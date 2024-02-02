@@ -43,45 +43,26 @@ const getUserById = async (req, res) => {
 //Description:  Update User By ID
 //Route:        PUT - api/users/update/:id
 //Access:       Private
-// const updateUserById = async (req, res) => {
-//     const userId = req.params.id;
-//     try {
-//         const user = await User.findByIdAndUpdate(userId, req.body, { new: true });
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
-//         res.status(200).json(user);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
 const updateUserById = async (req, res) => {
     const userId = req.params.id;
     const { password, newPassword, ...updateData } = req.body;
-
     try {
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
         // Validate the entered password
         const correctPassword = await bcrypt.compare(password, user.password);
-
         if (!correctPassword) {
             return res.status(401).json({ message: 'Incorrect password' });
         }
-
         // If a new password is provided, hash and update the password
         if (newPassword) {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
             updateData.password = hashedPassword;
         }
-
         // Update the user with the provided data
         const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
-
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json({ error: error.message });
