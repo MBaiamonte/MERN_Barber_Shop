@@ -14,30 +14,55 @@ const UserDashboard = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState();
-
-
+    const [allAppointments, setAllAppointments] = useState([])
+    const [serviceDetails, setServiceDetails] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
 
     //functions and handlers
     useEffect(() => {
         if (loginUserId) {
+            // Fetch user appointments
+            axios.get(`http://localhost:5000/api/appointments/user/${loginUserId}`)
+                .then(appointmentsRes => {
+                    console.log('appointment data:' , appointmentsRes.data)
+                    setAllAppointments(appointmentsRes.data);
+
+                    // Extract unique service ids
+                    const serviceIds = [...new Set(appointmentsRes.data.map(appointment => appointment.service))];
+
+                    // Fetch service details for each id
+                    const serviceRequests = serviceIds.map(serviceId =>
+                        axios.get(`http://localhost:5000/api/services/${serviceId}`)
+                    );
+                    // Use Promise.all to wait for all service requests
+                    Promise.all(serviceRequests)
+                    .then(serviceResponses => {
+                        const serviceDetails = serviceResponses.map(response => response.data);
+                        console.log('Service Details:', serviceDetails);
+                        setServiceDetails(serviceDetails);
+                        setIsLoading(false);
+
+                    })
+                    .catch(error => {
+                        console.log('Error getting service details:', error);
+                    });
+                })
+                .catch(appointmentsError => {
+                    console.log('Error getting user appointments: ', appointmentsError);
+                });
+        }
+    }, [loginUserId]);
+
+    useEffect(() => {
+        if (loginUserId) {
             axios.get(`http://localhost:5000/api/users/${loginUserId}`)
                 .then(res => {
-                    console.log('response Data: ', res.data);
-                    // const user = {
-                    //     fullName: res.data.fullName,
-                    //     email: res.data.email,
-                    // };
                     setFullName(res.data.fullName);
                     setEmail(res.data.email);
                     setPhoneNumber(res.data.phoneNumber);
-                    // Use a callback in setUserData to handle the asynchronous nature
-                    // setUserData(prevUserData => {
-                    //     console.log("userData state: ", prevUserData);
-                    //     return user;
-                    setUserData(res.data);// this might contain the hashed, verify that it dosent and remove if it does
-                    // });
-                })
+                    setUserData(res.data);
+                    })
                 .catch(error => {
                     console.log('error getting user by id: ', error);
                 });
@@ -48,7 +73,9 @@ const UserDashboard = () => {
         console.log('update submit clicked, finish handler have it do something');
     }
 
-
+    if (isLoading) {
+        return <p>Loading...</p>; // Render a loading message or spinner while data is being fetched
+    }
     return (
         <Container className='profile-container'>
             <Row className='profile-header'>
@@ -99,19 +126,29 @@ const UserDashboard = () => {
                     <Table striped hover>
                         <thead>
                             <tr>
-                            <th>Past Appointments</th>
-                            <th>Date</th>
-                            <th>Service</th>
-                            <th>Cost</th>
+                                <th>Past Appointments</th>
+                                <th>Service</th>
+                                <th>Cost</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Appointment name</td>
-                                <td>jan 30th</td>
-                                <td>Beard Trim</td>
-                                <td>$$$$</td>
-                            </tr>
+                        {allAppointments.map((appointment, index) => {
+                            try {
+                                const appointmentDate = new Date(appointment.date);
+                                const serviceDetail = serviceDetails[index];
+
+                                return (
+                                    <tr key={appointment._id}>
+                                        <td>{appointmentDate.toLocaleDateString()} {appointmentDate.toLocaleTimeString()}</td>
+                                        <td>{serviceDetail ? serviceDetail.title : 'Unknown Service'}</td>
+                                        <td>{serviceDetail ?  `$${serviceDetail.price}` : 'Unknown Price'}</td>
+                                    </tr>
+                                );
+                            } catch (error) {
+                                console.error('Error parsing date:', error);
+                                return null; // or handle the error as needed
+                            }
+                        })}
                         </tbody>
                         </Table>
                         <Col className='col-4 '>
