@@ -72,10 +72,27 @@ const deleteAppointmentById = async (req, res) => {
     }
 };
 
+// Description: Get All Appointments By User ID
+// Route: GET - api/appointments/user/:userId
+// Access: Private
+const getAppointmentsByUserId = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const appointments = await Appointment.find({ user: userId });
+        res.status(200).json(appointments);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+
 module.exports = {
     createAppointment,
     getAllAppointments,
     getAppointmentById,
     updateAppointmentById,
     deleteAppointmentById,
+    getAppointmentsByUserId,
 };
