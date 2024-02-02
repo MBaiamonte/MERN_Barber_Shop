@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, Col, Row, Container} from 'react-bootstrap';
+import {useUser} from '../components/UserContext';
+
 import axios from 'axios';
 import '../styles/Services.css';
 import {Link} from 'react-router-dom';
 
 const Services = () => {
+    const { loginUserId } = useUser();
     const [allServices, setAllServices] = useState([]);
-    const navigate = useNavigate();
+    const [mensHaircuts, setMensHaircuts] = useState([]);
+    const [kidsHaircuts, setKidsHaircuts] = useState([]);
+    const [womensHaircuts, setWomensHaircuts] = useState([])
 
 
     useEffect(()=>{
@@ -23,31 +27,117 @@ const Services = () => {
         fetchData();
     }, [])
 
+//run separate useEffect for each filter to prevent infinite loop in console.
+    useEffect(() => {
+        setMensHaircuts(allServices.filter(service => service.forMen));
+    }, [allServices]);
+    
+    useEffect(() => {
+        setWomensHaircuts(allServices.filter(service => service.forWomen));
+    }, [allServices]);
+    
+    useEffect(() => {
+        setKidsHaircuts(allServices.filter(service => service.forKids));
+    }, [allServices]);
 
+    const bookingHandler = () => {
+        console.log("clicked")
+    }
 
     return (
-    <div className='service'>
-        <h1 className='service-h1'>Our Services</h1>
-        <div className='services-container'>
-            {allServices.map((service, index)=>{
-                return(
-                        <Card key={index} className='service-cards'>
-                            <Card.Body>
-                                <Card.Title className='service-title'>{service.title}</Card.Title>
-                                <Card.Subtitle>
-                                    <div className='service-subtitle'>
-                                        <p className='service-p'>{service.duration} min</p>
-                                        <p className='service-p'>${service.price}</p>
-                                    </div>
-                                </Card.Subtitle>
-                                <Card.Text>{service.description}</Card.Text>
-                            <Link to='/booking'><Button>Book Now</Button></Link>
-                            </Card.Body>
-                        </Card>
-                )
-            })}
-        </div>
-    </div>
+        <Container>
+                <Row>
+                    <h1 id='service-title-h1'>Our Services</h1>
+                </Row>
+                <Row>
+                    <h3 className='service-category-titles-h3'>Mens</h3>
+                    <Col className='service-card-container-col'>
+                    {mensHaircuts.map((service, index)=>{
+                        return(
+                            <Card key={index} className='service-cards'>
+                                <Card.Body>
+                                    <Card.Title className='service-title'>{service.title}</Card.Title>
+                                    <Card.Subtitle>
+                                        <div className='service-subtitle'>
+                                            <p className='service-p'>{service.duration} min</p>
+                                            <p className='service-p'>${service.price}</p>
+                                        </div>
+                                    </Card.Subtitle>
+                                    <Card.Text>{service.description}</Card.Text>
+                                    {/* conditional rendering for appointments button */}
+                                    {loginUserId === null ? (
+                                        //if not logged in show nothing
+                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                    ) : (
+                                        //if logged in show appointments button
+                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                    )}
+                                </Card.Body>
+                            </Card>
+                        )
+                    })}
+                    </Col>
+                </Row>
+                <Row>
+                    <h3 className='service-category-titles-h3'>Women's</h3>
+                    <Col className='service-card-container-col'>
+                    {womensHaircuts.map((service, index)=>{
+                        return(
+                            <Card key={index} className='service-cards'>
+                                <Card.Body>
+                                    <Card.Title className='service-title'>{service.title}</Card.Title>
+                                    <Card.Subtitle>
+                                        <div className='service-subtitle'>
+                                            <p className='service-p'>{service.duration} min</p>
+                                            <p className='service-p'>${service.price}</p>
+                                        </div>
+                                    </Card.Subtitle>
+                                    <Card.Text>{service.description}</Card.Text>
+                                {/* conditional rendering for appointments button */}
+                                {loginUserId === null ? (
+                                        //if not logged in show nothing
+                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                    ) : (
+                                        //if logged in show appointments button
+                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                    )}
+                                </Card.Body>
+                            </Card>
+                        )
+                    })}
+                    </Col>
+                </Row>
+                <Row>
+                    <h3 className='service-category-titles-h3'>Kids</h3>
+                    <Col className='service-card-container-col'>
+                    {kidsHaircuts.map((service, index)=>{
+                        return(
+                            <Card key={index} className='service-cards'>
+                                <Card.Body>
+                                    <Card.Title className='service-title'>{service.title}</Card.Title>
+                                    <Card.Subtitle>
+                                        <div className='service-subtitle'>
+                                            <p className='service-p'>{service.duration} min</p>
+                                            <p className='service-p'>${service.price}</p>
+                                        </div>
+                                    </Card.Subtitle>
+                                    <Card.Text>{service.description}</Card.Text>
+                                {/* conditional rendering for appointments button */}
+                                {loginUserId === null ? (
+                                        //if not logged in show nothing
+                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                    ) : (
+                                        //if logged in show appointments button
+                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                    )}
+                                </Card.Body>
+                            </Card>
+                        )
+                    })}
+                    </Col>
+                </Row>
+                
+        </Container>
     )
 }
 

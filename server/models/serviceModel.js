@@ -27,7 +27,22 @@ const serviceSchema = new mongoose.Schema({
             message: 'Price must have exactly two decimal places'
         },
         default:0.00
-    }
+    },
+    forMen:{
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    forWomen:{
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    forKids:{
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 },{
     timestamps:true
 });
