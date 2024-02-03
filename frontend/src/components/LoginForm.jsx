@@ -7,30 +7,34 @@ import axios from 'axios';
 import { useUser } from './UserContext';
 
 
+
 export const LoginForm = () => {
     //Declarations
     const {setLoginUserId} = useUser();
     const [email, setEmail] = useState('');
     const [password, setPassword]= useState('');
     const navigate = useNavigate();
-
+    const [errors,setErrors]=useState([])
 
     //Handlers and Functions
-    const loginHandler =(e) => {
+    const loginHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/user/login', {email, password}, {withCredentials: true})
-            .then( res =>{
+        axios.post('http://localhost:5000/api/user/login', { email, password }, { withCredentials: true })
+            .then(res => {
                 const userToLogin = {
                     userId: res.data.userId,
                 };
-                console.log('res.data:', res.data);
                 setLoginUserId(res.data.userId);
-                console.log('loginUserId: ',res.data.userId);
                 navigate(`/profile/${userToLogin.userId}`);
             })
-            .catch(err =>{
-                console.log('error with login:', err );
-            })
+            .catch(error => {
+                console.log('error with login:', error);
+                // Update the state with the error messages
+                const errorMessage = error.response?.data?.message || 'An unexpected error occurred. Please try again.';
+                const errorArray = Array.isArray(errorMessage) ? errorMessage : [errorMessage];
+                setErrors(errorArray);
+                console.log(errorMessage);
+            });
     }
 
     return (
@@ -40,6 +44,16 @@ export const LoginForm = () => {
                 <FormContainer>
                 <h1 className='login-h1'>Sign In</h1>
                     <Form onSubmit={loginHandler}>
+                        {/* check for validation error and display them */}
+                        <div style={{color:"red"}}>
+                            {
+                                errors.map((err,idx)=>{
+                                    return(
+                                        <p key={idx}>{err}</p>
+                                    )
+                                })
+                            }
+                        </div>
                         <Form.Group controlId='email' className='my-3'>
                             <Form.Label className='login-form-label' >Email</Form.Label>
                                 <Form.Control

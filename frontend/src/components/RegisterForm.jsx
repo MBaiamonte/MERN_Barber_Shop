@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import {Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Register.css';
-import { toast } from 'react-toastify';
+import { useUser } from './UserContext';
 
 
 const RegisterForm = () => {
@@ -15,11 +15,32 @@ const RegisterForm = () => {
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     const navigate = useNavigate();
+    const {setLoginUserId} = useUser();
+    const [errors,setErrors]=useState([])
 
     //Handlers and Functions
-    const registerHandler = (e) => {
-        console.log('clicked reg button ');
-    }
+    const registerHandler =  async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(`http://localhost:5000/api/users/register`, {fullName, email,password, confirmPassword})
+                .then(res => {
+                    console.log(res.data);
+                    setFullName('');
+                    setEmail('');
+                    setPassword('');
+                setConfirmPassword('');
+                setLoginUserId(res.data.user._id);
+                navigate('/');
+                });
+        } catch (error) {
+            console.log(error.response.data)
+            const errorArray=[]
+            for (const key of Object.keys(error.response.data.errors)){
+                errorArray.push(error.response.data.errors[key].message)
+            }
+            setErrors(errorArray);
+        }
+    };
 
     return (
         <Row className='register-container'>
@@ -27,6 +48,16 @@ const RegisterForm = () => {
                 <FormContainer>
                 <h1 className='register-h1'>Register</h1>
                     <Form onSubmit={registerHandler}>
+                    {/* check for validation error and display them */}
+                        <div style={{color:"red"}}>
+                            {
+                                errors.map((err,idx)=>{
+                                    return(
+                                        <p key={idx}>{err}</p>
+                                    )
+                                })
+                            }
+                        </div>
                         <Form.Group controlId='fullName' className='my-3'>
                             <Form.Label className='register-form-label' >Full Name</Form.Label>
                                 <Form.Control

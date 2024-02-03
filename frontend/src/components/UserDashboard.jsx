@@ -75,9 +75,8 @@ const UserDashboard = () => {
             return;
         }
         try {
-            // Add a password field to the request
             const response = await axios.put(`http://localhost:5000/api/users/update/${loginUserId}`, { fullName, email, phoneNumber, password });
-    
+            setPassword('')
             console.log('Updated user:', response.data);
         } catch (error) {
             console.log('Update person error', error);
@@ -118,10 +117,14 @@ const UserDashboard = () => {
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label className='profile-label'>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                        <Form.Control type="password" placeholder="Enter password to update" value={password} onChange={(e) => setPassword(e.target.value)} />
                                     </Form.Group>
-                    {/* add conditions disabled button button if password not entered */}
-                                    <Button type="submit">Update info</Button>
+                                {/* conditionally render update button based on wether password felid is empty or not*/}
+                                    {password === '' ? (
+                                        <></>
+                                    ) : (
+                                        <Button type="submit">Update info</Button>
+                                    )}
                                 </Form>
                             </Card.Text>
                         </Card.Body>
@@ -157,7 +160,7 @@ const UserDashboard = () => {
                                 );
                             } catch (error) {
                                 console.error('Error parsing date:', error);
-                                return null; // or handle the error as needed
+                                return null;
                             }
                         })}
                         </tbody>

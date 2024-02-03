@@ -89,21 +89,37 @@ const deleteUserById = async (req, res) => {
 //Description:  Login User
 //Route:        DELETE - api/login
 //Access:       Public
+// const login = async (req, res) => {
 const login = async (req, res) => {
-    const user = await User.findOne({email: req.body.email});
-    if(user === null) {
-        return res.status(400).json({message: 'login email input does not exist in db' });
+    try {
+        //checks to see if email exists in db
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ message: 'Email not found. Please check your email and try again.' });
+        }
+        //checks if entered password is correct for email 
+        const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!correctPassword) {
+            return res.status(400).json({ message: 'Incorrect password. Please check your password and try again.' });
+        }
+        //if password and email validations pass create a token and sign it
+        const userToken = jwt.sign({
+            id: user._id
+        }, process.env.JWT_KEY);
+        //send cookie response to front end if all validations pass without errors
+        res.cookie('userToken', userToken, {
+            httpOnly: true
+        }).json({ message: 'Login Successful!', userToken, userId: user._id });
+    // catch errors and send error message as json error object to frontend 
+    } catch (error) {
+        console.error('Login error:', error);
+
+        // Log the error messages
+        if (error.response && error.response.data && error.response.data.message) {
+            console.error('Error message from backend:', error.response.data.message);
+        }
+        res.status(500).json({ message: 'An unexpected error occurred. Please try again later.' });
     }
-    const correctPassword = await bcrypt.compare(req.body.password, user.password);
-    if(!correctPassword){
-        return res.status(400).json({message: 'password does not match that email' });
-    }
-    const userToken = jwt.sign({
-        id: user._id
-    }, process.env.JWT_KEY);
-    res.cookie('userToken', userToken,{
-        httpOnly: true
-    }).json({message: 'Login Successful!', userToken, userId:user._id})
 };
 
 // Description: Logout User
