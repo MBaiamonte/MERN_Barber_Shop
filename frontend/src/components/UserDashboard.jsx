@@ -166,7 +166,7 @@ const UserDashboard = () => {
                         </tbody>
                         </Table>
                         <Col className='col-4 '>
-                            <Link><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
+                            <Link to={`/appointment/${loginUserId}/book`}><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
                         </Col>
                 </Col>
             </Row>

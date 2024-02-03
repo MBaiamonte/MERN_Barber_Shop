@@ -16,7 +16,7 @@ const Welcome = () => {
                         {loginUserId === null ? (
                             <Button style={{backgroundColor: 'white'}}><Link to='/login'>Login To Book Appointment</Link></Button>
                         ) : (
-                            <Button style={{backgroundColor: 'white'}}><Link to='/appointments'>Book Now</Link></Button>
+                            <Button style={{backgroundColor: 'white'}}><Link to={`/appointment/${loginUserId}/book`}>Book Now</Link></Button>
                         )}
                     </p>
             </Row>

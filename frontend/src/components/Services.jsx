@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Card, Button, Col, Row, Container} from 'react-bootstrap';
 import {useUser} from '../components/UserContext';
-
 import axios from 'axios';
 import '../styles/Services.css';
 import {Link} from 'react-router-dom';
@@ -40,10 +39,6 @@ const Services = () => {
         setKidsHaircuts(allServices.filter(service => service.forKids));
     }, [allServices]);
 
-    const bookingHandler = () => {
-        console.log("clicked")
-    }
-
     return (
         <Container>
                 <Row>
@@ -70,7 +65,7 @@ const Services = () => {
                                         <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
                                     )}
                                 </Card.Body>
                             </Card>
@@ -99,7 +94,7 @@ const Services = () => {
                                         <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
                                     )}
                                 </Card.Body>
                             </Card>
@@ -128,7 +123,7 @@ const Services = () => {
                                         <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Button onClick={bookingHandler} className='service-booking-btn'>Book Now!</Button>
+                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
                                     )}
                                 </Card.Body>
                             </Card>

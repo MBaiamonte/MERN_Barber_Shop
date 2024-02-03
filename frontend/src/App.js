@@ -7,6 +7,7 @@ import ServicePage from './views/ServicePage';
 import AboutUsPage from './views/AboutUsPage';
 import DashboardPage from './views/DashboardPage';
 import {UserProvider} from './components/UserContext';
+import AppointmentFormPage from './views/AppointmentFormPage';
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
             <Route element={<RegisterForm/>} path="/register"/>
             <Route element={<ServicePage/>} path="/services"/>
             <Route element={<AboutUsPage/>} path="/aboutUs"/>
-            <Route element={<DashboardPage />} path='/profile/:id'/>
+            <Route element={<DashboardPage />} path='/profile/:userId'/>
+            <Route element={<AppointmentFormPage />} path='/appointment/:userId/book'/>
           </Routes>
           </UserProvider>
       </BrowserRouter>

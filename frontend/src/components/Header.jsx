@@ -31,7 +31,15 @@ const Header = () => {
         } else {
           // Handle case where loginUserId is not available (not logged in)
             console.log('User not logged in');
-        }
+        };
+    };
+
+    const redirectBookAppointment  = () => {
+        if(loginUserId){
+            navigate(`/appointment/${loginUserId}/book`)
+        } else{
+            console.log('User not logged in')
+        };
     };
 
     return (
@@ -56,7 +64,7 @@ const Header = () => {
                         <></>
                     ) : (
                         //if logged in show appointments button
-                        <LinkContainer to='/booking'>
+                        <LinkContainer to={`/appointment/${loginUserId}/book`}>
                             <Nav.Link className='nav-btn'>Appointments</Nav.Link>
                         </LinkContainer>
                     )}
