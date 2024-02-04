@@ -3,21 +3,21 @@ const mongoose = require('mongoose');
 const serviceSchema = new mongoose.Schema({
     title:{
         type:String,
-        required: true,
-        unique: true
+        required: [true,' Title cant be title'],
+        unique: [true, 'Title already in use, try a different one '],
     },
     description:{
         type: String,
-        required: true,
+        required: [true, 'Description cant be empty'],
     },
     duration:{
         type: Number,
-        required: true,
+        required: [true, 'Duration cant be empty'],
         default: 10,
     },
     price: {
         type: Number,
-        required: true,
+        required: [true, 'Price cant be empty'],
         validate: {
             validator: function (value) {
                 // Custom validator function to check if the price has exactly two decimal places

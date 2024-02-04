@@ -3,13 +3,13 @@ const Appointment= require('../models/appointmentModel')
 //Description:  Create New Appointment
 //Route:        POST - api/appointments/create
 //Access:       Public
-const createAppointment = async (req,res) => {
+const createAppointment = async (req,res) => { 
     try {
         const newAppointment = new Appointment(req.body);
         await newAppointment.save();
         res.status(201).json(newAppointment)
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).json(error);
     }
 };
 //Description:  Get All Appointments
@@ -20,7 +20,7 @@ const getAllAppointments = async (req, res) => {
         const appointments = await Appointment.find();
         res.status(200).json(appointments);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json(err);
     }
 };
 

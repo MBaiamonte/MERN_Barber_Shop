@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 //Access:       Public
 const registerUser = (req, res) => {
     User.create(req.body)
-        .then( user => res.json({ msg: "user successfully registered", user:user}))
+        .then( user => res.json({ message: "user successfully registered", user:user}))
         .catch(err => res.status(400).json(err));
 }
 
