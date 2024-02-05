@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Container, Row, Button, Form} from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import axios from 'axios';
 import FormContainer from './FormContainer';
 import { useUser } from './UserContext';
@@ -14,6 +14,7 @@ const AppointmentFrom = () => {
   const [comments, setComments] = useState('');
   const navigate = useNavigate();
   const [errors,setErrors]=useState([]);
+  const [allAppointments, setAllAppointments] = useState([]);
 
 
   //Handlers and Functions
@@ -29,10 +30,41 @@ const AppointmentFrom = () => {
     };
     fetchData();
   }, []);
-
+  //fetch all user appointments to ensure new appointment is unique
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/appointments/all');
+        setAllAppointments(response.data);
+      } catch (error) {
+        console.log('error getting all appointments:', error);
+      }
+    };
+  
+    fetchAppointments();
+  }, []);
+  
   const appointmentBookingHandler = async (e) => {
     e.preventDefault();
-    //create new appointment object with form field data
+    const selectedDate = new Date(appointmentDate);
+    const currentDate = new Date();
+    //validate datetime is not in the past
+    if (selectedDate < currentDate) {
+      setErrors(['Please select a future date and time for the appointment.']);
+      return;
+    }
+    // Check if the selected date and time already exist across all users
+    const isDuplicate = allAppointments.some((appointment) => {
+      const existingDate = new Date(appointment.date);
+      return existingDate.toISOString() === selectedDate.toISOString(); // Compare as strings
+    });
+  
+    if (isDuplicate) {
+      setErrors(['An appointment already exists for the selected date and time.']);
+      return;
+    }
+  
+    // create new appointment object with form field data
     try {
       const newAppointment = {
         user: loginUserId,
@@ -41,28 +73,27 @@ const AppointmentFrom = () => {
         comments: comments,
       };
       // Send a POST request to create a new appointment
-      const response = await axios.post('http://localhost:5000/api/appointments/create', newAppointment, {withCredentials: true});
+      const response = await axios.post('http://localhost:5000/api/appointments/create', newAppointment, { withCredentials: true });
       console.log('New appointment created:', response.data);
-      setAppointmentDate('')
-      setComments('')
-      setAppointmentService('')
-      setErrors([])
-      navigate(`/profile/${loginUserId}`)
+      setAppointmentDate('');
+      setComments('');
+      setAppointmentService('');
+      setErrors([]);
+      navigate(`/profile/${loginUserId}`);
     } catch (error) {
-        if (error.response?.data?.errors) {
-          const dateError = error.response.data.errors.date;
-          const serviceError = error.response.data.errors.service;
-          const commentsError = error.response.data.errors.comments;
-          // Update state with specific error messages
-          setErrors([dateError?.message, serviceError?.message, commentsError?.message].filter(Boolean));
+      if (error.response?.data?.errors) {
+        const dateError = error.response.data.errors.date;
+        const serviceError = error.response.data.errors.service;
+        const commentsError = error.response.data.errors.comments;
+        // Update state with specific error messages
+        setErrors([dateError?.message, serviceError?.message, commentsError?.message].filter(Boolean));
       } else {
-          // Update state with a general error message
-          setErrors(['An unexpected error occurred. Please try again.']);
+        // Update state with a general error message
+        setErrors(['An unexpected error occurred. Please try again.']);
       }
       console.error(error);
     }
   };
-
   return (
     <FormContainer>
       <h3>Book New Appointment</h3>
@@ -89,7 +120,7 @@ const AppointmentFrom = () => {
           <Form.Label>Date</Form.Label>
           <Form.Control
             className=''
-            type='date' 
+            type='datetime-local' 
             placeholder='Enter Date' 
             value={appointmentDate} 
             onChange={(e)=>setAppointmentDate(e.target.value)}>
