@@ -18,6 +18,7 @@ const UserDashboard = () => {
     const [serviceDetails, setServiceDetails] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [password, setPassword] = useState('');
+    const [nextAppointment, setNextAppointment] = useState(null)
 
 
     //functions and handlers
@@ -26,25 +27,29 @@ const UserDashboard = () => {
             // Fetch user appointments
             axios.get(`http://localhost:5000/api/appointments/user/${loginUserId}`)
                 .then(appointmentsRes => {
-                    console.log('appointment data:' , appointmentsRes.data)
+                    console.log('appointment data:', appointmentsRes.data);
                     setAllAppointments(appointmentsRes.data);
-                    // Extract unique service ids
-                    const serviceIds = [...new Set(appointmentsRes.data.map(appointment => appointment.service))];
+                    //select next appointment and save in state
+                    const sortedAppointments = appointmentsRes.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    const newest = sortedAppointments[0];
+                    setNextAppointment(newest);
+                    // Extract all service ids without removing duplicates
+                    const serviceIds = appointmentsRes.data.map(appointment => appointment.service);
                     // Fetch service details for each id
                     const serviceRequests = serviceIds.map(serviceId =>
                         axios.get(`http://localhost:5000/api/services/${serviceId}`)
                     );
-                    // Use Promise.all to wait for all service requests
                     Promise.all(serviceRequests)
-                    .then(serviceResponses => {
-                        const serviceDetails = serviceResponses.map(response => response.data);
-                        console.log('Service Details:', serviceDetails);
-                        setServiceDetails(serviceDetails);
-                        setIsLoading(false);
-                    })
-                    .catch(error => {
-                        console.log('Error getting service details:', error);
-                    });
+                        .then(serviceResponses => {
+                            const serviceDetails = serviceResponses.map(response => response.data);
+                            console.log('Service Details:', serviceDetails);
+                            setServiceDetails(serviceDetails);
+                            setIsLoading(false);
+                            
+                        })
+                        .catch(error => {
+                            console.log('Error getting service details:', error);
+                        });
                 })
                 .catch(appointmentsError => {
                     console.log('Error getting user appointments: ', appointmentsError);
@@ -77,7 +82,7 @@ const UserDashboard = () => {
         try {
             const response = await axios.put(`http://localhost:5000/api/users/update/${loginUserId}`, { fullName, email, phoneNumber, password });
             setPassword('')
-            console.log('Updated user:', response.data);
+            window.alert('Update Successful!');
         } catch (error) {
             console.log('Update person error', error);
         }
@@ -131,11 +136,20 @@ const UserDashboard = () => {
                     </Card>
                 </Col>
                 <Col>
-                    <Col>
+                    <Col className='d-flex justify-content-between align-items-center mb-2'>
                         <h4>
                             Next Appointment:
                         </h4> 
-                        <p>Date of next appointment/conditional render if none</p>
+                        {/* conditionally render next appointment  */}
+                        {nextAppointment ? (
+                            <>
+                                {console.log('next Appointment', nextAppointment)}
+                                <span> Date: {new Date(nextAppointment.date).toLocaleDateString()}</span>
+                                <span> Time: {new Date(nextAppointment.date).toLocaleTimeString()}</span>
+                            </>
+                        ) : (
+                            <h7>No appointments</h7>
+                        )}
                     </Col>
                     <Table striped hover>
                         <thead>
