@@ -18,7 +18,7 @@ export const UserProvider = ({ children }) => {
             {children}
         </UserContext.Provider>
     );
-};
+};  
 
 export const useUser = () => {
     return useContext(UserContext);

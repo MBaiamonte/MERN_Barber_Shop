@@ -104,12 +104,13 @@ const login = async (req, res) => {
         }
         //if password and email validations pass create a token and sign it
         const userToken = jwt.sign({
-            id: user._id
+            id: user._id,
+            Admin: user.isAdmin,
         }, process.env.JWT_KEY);
         //send cookie response to front end if all validations pass without errors
         res.cookie('userToken', userToken, {
             httpOnly: true
-        }).json({ message: 'Login Successful!', userToken, userId: user._id });
+        }).json({ message: 'Login Successful!', userToken, userId: user._id, isAdmin: user.isAdmin });
     // catch errors and send error message as json error object to frontend 
     } catch (error) {
         console.error('Login error:', error);
