@@ -29,7 +29,6 @@ const RegisterForm = () => {
                     setEmail('');
                     setPassword('');
                 setConfirmPassword('');
-                setLoginUserId(res.data.user._id);
                 navigate('/');
                 });
         } catch (error) {
