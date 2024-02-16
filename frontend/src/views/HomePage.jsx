@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
+import Services from '../components/Services'
 
 
 
@@ -11,6 +12,7 @@ const HomePage = () => {
         <>
             <Header/>
             <Welcome/>
+            <Services/>
             <Footer/>
         </>
     )
