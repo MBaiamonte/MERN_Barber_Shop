@@ -60,7 +60,7 @@ const RegisterForm = () => {
                         <Form.Group controlId='fullName' className='my-3'>
                             <Form.Label className='register-form-label' >Full Name</Form.Label>
                                 <Form.Control
-                                    className='register-form-inputs'
+                                    className='register-form-inputs shadow-none'
                                     type='text' 
                                     placeholder='Enter First Name' 
                                     value={fullName} 
@@ -70,7 +70,7 @@ const RegisterForm = () => {
                         <Form.Group controlId='email' className='my-3'>
                             <Form.Label className='register-form-label' >Email</Form.Label>
                                 <Form.Control
-                                    className='register-form-inputs'
+                                    className='register-form-inputs shadow-none'
                                     type='email' 
                                     placeholder='Enter Email' 
                                     value={email}  
@@ -80,7 +80,7 @@ const RegisterForm = () => {
                         <Form.Group controlId='password' className='my-3'>
                             <Form.Label className='register-form-label'>Password</Form.Label>
                                 <Form.Control
-                                    className='register-form-inputs'
+                                    className='register-form-inputs shadow-none'
                                     type='password' 
                                     placeholder='Enter Password' 
                                     value={password} 
@@ -90,14 +90,14 @@ const RegisterForm = () => {
                         <Form.Group controlId='confirmPassword' className='my-3'>
                             <Form.Label className='register-form-label'> Confirm Password</Form.Label>
                                 <Form.Control
-                                    className='register-form-inputs'
+                                    className='register-form-inputs shadow-none'
                                     type='password' 
                                     placeholder='Confirm Password' 
                                     value={confirmPassword} 
                                     onChange={(e)=>setConfirmPassword(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
-                        <Button className='register-btn' type='submit'> Register </Button>
+                        <button className='register-btn' type='submit'> Register </button>
                     </Form>
                     <Row className='py-3'>
                         <Col >

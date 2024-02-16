@@ -37,6 +37,9 @@
 .login-form-inputs{
     font-size:18px ;
 }
+#login-form-inputs:active{
+    box-shadow: #000036;
+}
 .login-h1{
     font-size: 60px;
     font-family: 'Spooky', serif;
@@ -45,11 +48,13 @@
     font-size: 22px;
     font-family: 'Spooky', serif;
 }
-.login-btn, .login-btn:hover{
+.login-btn{
     font-size: 25px;
     background-color: #000036;
     border: none;
     font-family: 'Spooky', serif;
+    color: white;
+    border-radius: 10px;
 }
 .login-btn:active{
     transform: scale(.95);

@@ -33,7 +33,9 @@
     font-size: 25px;
     font-family: 'Spooky', serif;
 }
-
+.form-control {
+    border: 0;
+}
 .register-form-inputs{
     font-size:18px ;
 }
@@ -46,11 +48,15 @@
     font-size: 25px;
     font-family: 'Spooky', serif;
 }
-.register-btn, .register-btn:hover {
+.register-btn{
     font-size: 25px;
     background-color: #000036;
     border: none;
     font-family: 'Spooky', serif;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 45px;
 }
 .register-btn:active{
     transform: scale(.95);

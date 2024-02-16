@@ -57,7 +57,7 @@ export const LoginForm = () => {
                         <Form.Group controlId='email' className='my-3'>
                             <Form.Label className='login-form-label' >Email</Form.Label>
                                 <Form.Control
-                                    className='login-form-inputs'
+                                    className='login-form-inputs shadow-none'
                                     type='email' 
                                     placeholder='Enter Email' 
                                     value={email} 
@@ -67,14 +67,14 @@ export const LoginForm = () => {
                         <Form.Group controlId='password' className='my-3'>
                             <Form.Label className='login-form-label'>Password</Form.Label>
                                 <Form.Control
-                                    className='login-form-inputs'
+                                    className='login-form-inputs shadow-none border-none'
                                     type='password' 
                                     placeholder='Enter Password' 
                                     value={password} 
                                     onChange={(e)=>setPassword(e.target.value)}>
                                 </Form.Control>
                         </Form.Group>
-                        <Button className='login-btn' type='submit' > Sign In </Button>
+                        <button className='login-btn' type='submit' > Sign In </button>
                     </Form>
                     <Row className='py-3'>
                         <Col >
