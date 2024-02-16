@@ -28,5 +28,14 @@
     z-index: 1;
     text-align: center;
 }
-
+.welcome-btn{
+    height: 50px;
+    width: 150px;
+    font-size: 30px;
+    border-radius: 10px;
+    border: none;
+}
+.welcome-btn:active{
+    transform: scale(.98);
+}
 

@@ -40,8 +40,8 @@ const Services = () => {
     }, [allServices]);
 
     return (
-        <Container>
-                <Row>
+        <Container id='service-container'>
+                <Row id='service-title-container'>
                     <h1 id='service-title-h1'>Our Services</h1>
                 </Row>
                 <Row>
@@ -59,15 +59,18 @@ const Services = () => {
                                         </div>
                                     </Card.Subtitle>
                                     <Card.Text>{service.description}</Card.Text>
+                                </Card.Body>
+                                {/* Add the button here */}
+                                <div className="d-flex justify-content-center mt-auto"> {/* Use mt-auto to push the button to the bottom */}
                                     {/* conditional rendering for appointments button */}
                                     {loginUserId === null ? (
                                         //if not logged in show nothing
-                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                        <Link to='/login'><button id='service-booking-btn'>Login to Book!</button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
+                                        <Link to={`/appointment/${loginUserId}/book`}><button id='service-booking-btn'>Book Now!</button></Link>
                                     )}
-                                </Card.Body>
+                                </div>
                             </Card>
                         )
                     })}
@@ -78,6 +81,7 @@ const Services = () => {
                     <Col className='service-card-container-col'>
                     {womensHaircuts.map((service, index)=>{
                         return(
+
                             <Card key={index} className='service-cards'>
                                 <Card.Body>
                                     <Card.Title className='service-title'>{service.title}</Card.Title>
@@ -88,15 +92,18 @@ const Services = () => {
                                         </div>
                                     </Card.Subtitle>
                                     <Card.Text>{service.description}</Card.Text>
-                                {/* conditional rendering for appointments button */}
-                                {loginUserId === null ? (
+                                </Card.Body>
+                                {/* Add the button here */}
+                                <div className="d-flex justify-content-center mt-auto"> {/* Use mt-auto to push the button to the bottom */}
+                                    {/* conditional rendering for appointments button */}
+                                    {loginUserId === null ? (
                                         //if not logged in show nothing
-                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                        <Link to='/login'><button id='service-booking-btn'>Login to Book!</button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
+                                        <Link to={`/appointment/${loginUserId}/book`}><button id='service-booking-btn'>Book Now!</button></Link>
                                     )}
-                                </Card.Body>
+                                </div>
                             </Card>
                         )
                     })}
@@ -117,15 +124,18 @@ const Services = () => {
                                         </div>
                                     </Card.Subtitle>
                                     <Card.Text>{service.description}</Card.Text>
-                                {/* conditional rendering for appointments button */}
-                                {loginUserId === null ? (
+                                </Card.Body>
+                                {/* Add the button here */}
+                                <div className="d-flex justify-content-center mt-auto"> {/* Use mt-auto to push the button to the bottom */}
+                                    {/* conditional rendering for appointments button */}
+                                    {loginUserId === null ? (
                                         //if not logged in show nothing
-                                        <Link to='/login' className='service-booking-btn'><Button>Login to Book!</Button></Link>
+                                        <Link to='/login' ><button id='service-booking-btn'>Login to Book!</button></Link>
                                     ) : (
                                         //if logged in show appointments button
-                                        <Link to={`/appointment/${loginUserId}/book`} className='service-booking-btn'><Button>Book Now!</Button></Link>
+                                        <Link to={`/appointment/${loginUserId}/book`}><button id='service-booking-btn'>Book Now!</button></Link>
                                     )}
-                                </Card.Body>
+                                </div>
                             </Card>
                         )
                     })}

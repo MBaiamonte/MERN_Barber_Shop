@@ -14,9 +14,9 @@ const Welcome = () => {
                         Your only as good as your last Haircut
                         <p className='welcome-p'>Edward ScissorHands</p>
                         {loginUserId === null ? (
-                            <Button style={{backgroundColor: 'white'}}><Link to='/login'>Login To Book Appointment</Link></Button>
+                            <Link to='/login'><button className='welcome-btn'>Login</button></Link>
                         ) : (
-                            <Button style={{backgroundColor: 'white'}}><Link to={`/appointment/${loginUserId}/book`}>Book Now</Link></Button>
+                            <Link to={`/appointment/${loginUserId}/book`}><button className='welcome-btn'>Book Now!</button></Link>
                         )}
                     </p>
             </Row>
