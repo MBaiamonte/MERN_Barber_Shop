@@ -43,8 +43,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar  className='d-inline-flex d-flex justify-content-between'  variant='dark' expand='lg' collapseOnSelect style={{backgroundColor: '#7C2B2B'}}>
-            <Container id='container'>
+        <Navbar  className='navbar'  variant='dark' expand='lg' collapseOnSelect style={{backgroundColor: '#7C2B2B'}}>
 
                     <LinkContainer to='/'>
                         <Navbar.Brand className='d-flex'>
@@ -52,8 +51,8 @@ const Header = () => {
                                 <img src='/images/barber_shop_logo.png' alt="logo"  className='logo'/>
                             </Col>
                             <Col className='store-name'>
-                                <h4 className='title'>Edward ScissorHands</h4>
-                                <h4 className='title'>Barber Shop</h4> 
+                                <h4>Edward ScissorHands</h4>
+                                <h4>Barber Shop</h4> 
                             </Col>
                         </Navbar.Brand>
                     </LinkContainer>
@@ -95,7 +94,6 @@ const Header = () => {
                         <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                     </NavDropdown>
                 )}
-            </Container>
         </Navbar>
     )
 }

@@ -5,9 +5,12 @@
     font-weight: normal;
     font-style: normal;
 }
+
 .navbar{
-    justify-content: space-between !important;
-    height: 100px !important;
+    display: flex;
+    justify-content: space-around !important;
+    height: 10vh !important;
+    min-height: 100px;
     width: 100vw;
 }
 
@@ -15,18 +18,7 @@
     width: 80px; /* Adjust the width as needed */
     height: auto; /* Maintain the aspect ratio */
     border-radius: 50%;
-    /* background: linear-gradient(to bottom right, #e6dede, #403f3e); */
-    /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5); */
-}
-#container {
-    display: flex ;
-    align-items: center;
-    justify-content: space-between ;
-    margin: 0 !important;
-    height: 100px !important;
-}
-#brand-col{
-    margin: 0 !important;
+
 }
 
 .store-name{
@@ -36,22 +28,21 @@
     justify-content: center;
     font-family: 'Spooky', serif;
     color: #F9F8ED;
-}
-.title{
     font-size: 30px !important;
-    margin-bottom: 0;
 }
 
 .logo-col{
     margin-right: 10%;
 }
+
 .nav-btn{
     font-family: 'Spooky', serif;
     color: #F9F8ED;
     font-size: 25px;
     font-weight: 400 !important;
 }
+
 .nav-btn:hover{
-    font-size: 30px;
     color: #F9F8ED;
+    text-decoration: underline;
 }
