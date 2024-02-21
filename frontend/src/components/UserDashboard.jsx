@@ -128,7 +128,7 @@ const UserDashboard = () => {
                                     {password === '' ? (
                                         <></>
                                     ) : (
-                                        <Button type="submit">Update info</Button>
+                                        <button type="submit" className='profile-btn'>Update info</button>
                                     )}
                                 </Form>
                             </Card.Text>
@@ -180,7 +180,7 @@ const UserDashboard = () => {
                         </tbody>
                         </Table>
                         <Col>
-                            <Link to={`/appointment/${loginUserId}/book`} id='profile-book-btn' >Book New Appointment!</Link>
+                            <Link to={`/appointment/${loginUserId}/book`} className='profile-btn' >Book New Appointment!</Link>
                         </Col>
                 </Col>
             </Row>
