@@ -107,22 +107,22 @@ const UserDashboard = () => {
                                 <Form onSubmit={updateFormHandler}>
                                     <Form.Group className="mb-3" controlId="fullName">
                                         <Form.Label className='profile-label'>Full Name</Form.Label>
-                                        <Form.Control type="text" placeholder={fullName} value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                                        <Form.Control type="text" placeholder={fullName} value={fullName} onChange={(e) => setFullName(e.target.value)}  className=' shadow-none'/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="email">
                                         <Form.Label className='profile-label'>Email</Form.Label>
-                                        <Form.Control type="email" placeholder={email} value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                        <Form.Control type="email" placeholder={email} value={email} onChange={(e) => setEmail(e.target.value)} className=' shadow-none'/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="phoneNumber">
                                         <Form.Label className='profile-label'>Phone Number</Form.Label>
-                                        <PhoneInput placeholder="Add your phone number" defaultCountry="US" value={phoneNumber || ''} onChange={(value) => setPhoneNumber(value)}/>
+                                        <PhoneInput placeholder="Add your phone number" defaultCountry="US" value={phoneNumber || ''} onChange={(value) => setPhoneNumber(value)} />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label className='profile-label'>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Enter password to update" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                        <Form.Control type="password" placeholder="Enter password to update" value={password} onChange={(e) => setPassword(e.target.value)} className=' shadow-none' />
                                     </Form.Group>
                                 {/* conditionally render update button based on wether password felid is empty or not*/}
                                     {password === '' ? (
@@ -165,7 +165,7 @@ const UserDashboard = () => {
                                 const appointmentDate = new Date(appointment.date);
                                 const serviceDetail = serviceDetails[index];
 
-                                return (
+                                return ( 
                                     <tr key={appointment._id}>
                                         <td>{appointmentDate.toLocaleDateString()} {appointmentDate.toLocaleTimeString()}</td>
                                         <td>{serviceDetail ? serviceDetail.title : 'Unknown Service'}</td>
