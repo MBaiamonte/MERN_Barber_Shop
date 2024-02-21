@@ -92,7 +92,7 @@ const UserDashboard = () => {
         return <p>Loading...</p>; // Render a loading message or spinner while data is being fetched
     }
     return (
-        <Container className='profile-container'>
+        <div className='profile-container'>
             <Row className='profile-header'>
                 <Col className='col-7 header-col'>
                     <h1 id='profile-title-h1'>Welcome, {fullName}</h1>
@@ -179,12 +179,12 @@ const UserDashboard = () => {
                         })}
                         </tbody>
                         </Table>
-                        <Col className='col-4 '>
-                            <Link to={`/appointment/${loginUserId}/book`}><Button id='profile-book-btn'>Book New Appointment!</Button></Link>
+                        <Col>
+                            <Link to={`/appointment/${loginUserId}/book`} id='profile-book-btn' >Book New Appointment!</Link>
                         </Col>
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 

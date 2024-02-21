@@ -1,6 +1,6 @@
 
 .profile-container{
-    width:100vw;
+    width:100vw ;
     height: auto;
     margin: 0;
     padding: 0;
@@ -23,19 +23,38 @@
 
 /* Update form styles*/
 .profile-body{
-    width: 100%;
-    padding-left: 5%;
+    width: 100vw;
+    /* height: 60vh; */
+    padding: 0 5%;
+    margin-bottom: 20px;
 }
 #profile-card-title{
     font-family: 'Spooky', serif;
     font-size: 35px;
 }
+h4{
+    font-family: 'Spooky', serif;
+    font-size: 40px;
+}
 
 .profile-update-card{
-    background-color: lightskyblue;
+    background-color: #F9F8ED;
+    border: none;
 }
 .profile-label{
     color: #000036;
     font-family: 'Spooky', serif;
     font-size: 20px;
+}
+
+
+#profile-book-btn{
+    font-size: 25px;
+    background-color: #000036;
+    border: none;
+    font-family: 'Spooky', serif;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
 }
