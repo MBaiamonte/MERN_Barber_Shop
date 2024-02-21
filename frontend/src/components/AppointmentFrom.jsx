@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import { Button, Form} from 'react-bootstrap';
+import { Form, Row, Col} from 'react-bootstrap';
 import axios from 'axios';
 import FormContainer from './FormContainer';
 import { useUser } from './UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import '../styles/Appointment.css';
 
 const AppointmentFrom = () => {
   //Declarations
@@ -48,6 +49,11 @@ const AppointmentFrom = () => {
     e.preventDefault();
     const selectedDate = new Date(appointmentDate);
     const currentDate = new Date();
+    //check if  date felid is empty
+    if (!appointmentDate) {
+      setErrors(['Please select a date and time for the appointment.']);
+      return;
+    }
     //validate datetime is not in the past
     if (selectedDate < currentDate) {
       setErrors(['Please select a future date and time for the appointment.']);
@@ -58,7 +64,7 @@ const AppointmentFrom = () => {
       const existingDate = new Date(appointment.date);
       return existingDate.toISOString() === selectedDate.toISOString(); // Compare as strings
     });
-  
+    //checks if date time is already booked
     if (isDuplicate) {
       setErrors(['An appointment already exists for the selected date and time.']);
       return;
@@ -95,60 +101,69 @@ const AppointmentFrom = () => {
     }
   };
   return (
-    <FormContainer>
-      <h3>Book New Appointment</h3>
-      <Form onSubmit={appointmentBookingHandler}>
-        <div style={{color:"red"}}>
-          {
-              errors.map((err,idx)=>{
-                  return(
-                      <p key={idx}>{err}</p>
-                  )
-              })
-          }
-        </div>
+    <div className='app-container'>
+      <FormContainer>
+        <Row className='app-header'>
+          <Col>
+              <h2 id='app-title-h1'>Book New Appointment</h2>
+          </Col>
+        </Row>
+        <Row id='app-form-body'>
+          <Form onSubmit={appointmentBookingHandler}>
+            <div style={{color:"red"}}>
+              {
+                  errors.map((err,idx)=>{
+                      return(
+                          <p key={idx}>{err}</p>
+                      )
+                  })
+              }
+            </div>
 
-        <Form.Group style={{display: 'none'}}>
-          <Form.Control 
-            type='text'
-            value={loginUserId}
-            readOnly
-          ></Form.Control>
-        </Form.Group>
+            <Form.Group style={{display: 'none'}}>
+              <Form.Control 
+                type='text'
+                value={loginUserId}
+                readOnly
+              ></Form.Control>
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Date</Form.Label>
-          <Form.Control
-            className=''
-            type='datetime-local' 
-            placeholder='Enter Date' 
-            value={appointmentDate} 
-            onChange={(e)=>setAppointmentDate(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+            <Form.Group>
+              <Form.Label className='app-form-label'>Date</Form.Label>
+              <Form.Control
+                className=' shadow-none'
+                type='datetime-local' 
+                placeholder='Enter Date' 
+                value={appointmentDate} 
+                onChange={(e)=>setAppointmentDate(e.target.value)}>
+              </Form.Control>
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Service</Form.Label>
-          <Form.Select value={appointmentService} onChange={(e) => setAppointmentService(e.target.value)}>
-            <option>Select Service</option>
-            {allServices.map((service, idx) => (
-              <option key={idx} value={service._id}>{service.title}</option>
-            ))}
-          </Form.Select>
-        </Form.Group>
+            <Form.Group>
+              <Form.Label className='app-form-label'>Service</Form.Label>
+              <Form.Select value={appointmentService} className=' shadow-none' onChange={(e) => setAppointmentService(e.target.value)}>
+                <option>Select Service</option>
+                {allServices.map((service, idx) => (
+                  <option key={idx} value={service._id}>{service.title}</option>
+                ))}
+              </Form.Select>
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Comments</Form.Label>
-          <Form.Control
-            type='textarea'
-            placeholder='Additional Comments'
-            value={comments}
-            onChange={(e) => {setComments(e.target.value)}}
-          ></Form.Control>
-        </Form.Group>
-        <Button type='submit' className='my-2'>Book Appointment</Button>
-      </Form>
-    </FormContainer>
+            <Form.Group>
+              <Form.Label className='app-form-label'>Comments</Form.Label>
+              <Form.Control
+                className=' shadow-none mb-2'
+                type='textarea'
+                placeholder='Additional Comments'
+                value={comments}
+                onChange={(e) => {setComments(e.target.value)}}
+              ></Form.Control>
+            </Form.Group>
+            <button type='submit' id='app-btn'>Book Appointment</button>
+          </Form>
+        </Row>
+      </FormContainer>
+    </div>
   );
 };
 
