@@ -18,6 +18,12 @@ app.use(
     express.urlencoded({extended: true}),
     cookieParser(),
     )
+
+    app.use(express.static(path.join(_dirname, '/frontend/build')));
+    app.get('*', (req,res)=>{
+        res.sendFile(path.resolve(_dirname, 'frontend', 'build', 'index.html'))
+    })
+
 //Connect To Database 
 connectDB()
     .then(() => {
