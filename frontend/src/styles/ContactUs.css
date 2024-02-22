@@ -35,6 +35,10 @@
 .contactUs-col{
     height:300px;
     width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .contactUs-socials-row{
     width: 70%;

@@ -1,6 +1,6 @@
-import React from 'react';
+import {React, useMemo} from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
-import {useJsApiLoader, GoogleMap, Marker} from '@react-google-maps/api'
+import {useJsApiLoader, GoogleMap, MarkerF} from '@react-google-maps/api'
 import '../styles/ContactUs.css';
 
 const ContactUs = () => {
@@ -14,18 +14,18 @@ const ContactUs = () => {
     //google maps 
     const {isLoaded} =useJsApiLoader({
         googleMapsApiKey: 'AIzaSyCzejn_6H7wIXc2P4Vi7aop8ExL34qAX7o'
-    })
+    });
+
+
+    const center = useMemo(() => ({lat:39.7358 , lng:-104.9899}), [])
+
+    const onLoad = (marker) =>{
+        console.log('marker', marker )
+    }
 
     if(!isLoaded){
         return <h1>Loading...</h1>
     }
-    const center = {lat:39.7358 , lng:-104.9899}
-
-    const customMarkerIcon = {
-        scaledSize: new window.google.maps.Size(50, 50), // Adjust the size of the marker
-        origin: new window.google.maps.Point(0, 0),
-        anchor: new window.google.maps.Point(25, 50) // Adjust the anchor point if necessary
-    };
 
     return (
         <>
@@ -40,8 +40,8 @@ const ContactUs = () => {
                     <p className='contactUs-location-p'>(123)-456-7890</p>
                 </Col>
                 <Col className='contactUs-col'>
-                    <GoogleMap center={center} zoom={15} mapContainerStyle={{width:'100%', height: '100%' }}>
-                        <Marker position={center} icon={customMarkerIcon} />
+                    <GoogleMap center={center} zoom={15} mapContainerStyle={{width:'70%', height: '100%' }}>
+                        <MarkerF position={center} onLoad={onLoad} />
                     </GoogleMap>
                 </Col>
             </Row>
