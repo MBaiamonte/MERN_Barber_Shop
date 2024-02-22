@@ -31,6 +31,11 @@
     font-size: 18px;
     color: #000036;
 }
+
+.contactUs-col{
+    height:300px;
+    width: auto;
+}
 .contactUs-socials-row{
     width: 70%;
     display: flex;

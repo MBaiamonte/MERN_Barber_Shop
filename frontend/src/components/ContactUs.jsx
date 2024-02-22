@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
+import {useJsApiLoader, GoogleMap, Marker} from '@react-google-maps/api'
 import '../styles/ContactUs.css';
 
 const ContactUs = () => {
@@ -9,6 +10,23 @@ const ContactUs = () => {
     const snapchatIconPath = '/images/snapchat_icon.png';
     const twitterIconPath = '/images/twitter_icon.png';
     const instagramIconPath = '/images/instagram_icon.png';
+
+    //google maps 
+    const {isLoaded} =useJsApiLoader({
+        googleMapsApiKey: 'AIzaSyCzejn_6H7wIXc2P4Vi7aop8ExL34qAX7o'
+    })
+
+    if(!isLoaded){
+        return <h1>Loading...</h1>
+    }
+    const center = {lat:39.7358 , lng:-104.9899}
+
+    const customMarkerIcon = {
+        scaledSize: new window.google.maps.Size(50, 50), // Adjust the size of the marker
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(25, 50) // Adjust the anchor point if necessary
+    };
+
     return (
         <>
             <Row className='contactUs-row'>
@@ -17,12 +35,14 @@ const ContactUs = () => {
             <Row className='contactUs-location-row'>
                 <Col className='contactUs-col'>
                     <h5 id='contactUs-location-h5'>Location</h5>
-                    <p className='contactUs-location-p'>47th St.</p>
-                    <p className='contactUs-location-p'>Denver, Colorado, 80532</p>
-                    <p className='contactUs-location-p'>(746)-343-4566</p>
+                    <p className='contactUs-location-p'>1226 Bannock St.</p>
+                    <p className='contactUs-location-p'>Denver, Colorado 80204</p>
+                    <p className='contactUs-location-p'>(123)-456-7890</p>
                 </Col>
                 <Col className='contactUs-col'>
-                    google api
+                    <GoogleMap center={center} zoom={15} mapContainerStyle={{width:'100%', height: '100%' }}>
+                        <Marker position={center} icon={customMarkerIcon} />
+                    </GoogleMap>
                 </Col>
             </Row>
             <Row className='contactUs-socials-row'>
