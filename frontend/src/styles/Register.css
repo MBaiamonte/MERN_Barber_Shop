@@ -9,7 +9,7 @@
 
 /*Left Column Styles*/
 .register-right-col{
-    /* background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\barber_pole_patent.jpg');  */
+    background-image: url('../../public/images/barber_pole_patent.jpg');
     background-size:cover ;
     background-position: center; 
     background-repeat: no-repeat;

@@ -8,7 +8,7 @@
 
 /*Left Column Styles*/
 .login-left-col{
-    /* background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\hair_shears_patent.jpg'); */
+    background-image: url('../../public/images/hair_shears_patent.jpg');
     background-size:cover ;
     background-position: center; 
     /* background-attachment: fixed; */

@@ -10,7 +10,7 @@
 .row-1{
     height: 700px;
     width: 100vw;
-    /* background-image: url('C:\Users\maba8\OneDrive\Documents\personal_coding_projects\MERN_Barber_Shop\frontend\public\images\welcome_1.webp');  */
+    background-image: url('../../public/images/welcome_1.webp'); 
     background-size: cover;
     background-position: center; 
     background-attachment: fixed;
